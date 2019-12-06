@@ -12,13 +12,21 @@
         <td>Last Name</td>
         <td>First Name</td>
         <td>Phone</td>
+        <td>Action</td>
     </tr>
-    <c:forEach var="student" items="${students}" begin="">
+    <jsp:useBean id="students" scope="request" type="java.util.List"/>
+    <c:forEach var="student" items="${students}">
         <tr>
             <td>${student.id}</td>
             <td>${student.lastName}</td>
             <td>${student.firstName}</td>
             <td>${student.phone}</td>
+            <td>
+                <c:url value="/student-delete" var="delete_link">
+                    <c:param name="id" value="${student.id}"/>
+                </c:url>
+                <a href="${delete_link}">Delete</a>
+            </td>
         </tr>
     </c:forEach>
 </table>

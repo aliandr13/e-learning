@@ -27,9 +27,9 @@ public interface StudentService {
     /**
      * Deletes student by Id
      *
-     * @param student to delete
+     * @param id to delete
      */
-    void delete(Student student);
+    void delete(Long id);
 
     /**
      * Updates student
