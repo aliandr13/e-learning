@@ -1,35 +1,42 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
+<%@ taglib prefix="a" uri="/WEB-INF/taglib/auth.tld" %>
 
-<table>
-    <tr>
-        <td>Id</td>
-        <td>Last Name</td>
-        <td>First Name</td>
-        <td>Phone</td>
-        <td>Action</td>
-    </tr>
+<jsp:include page="../include/header.jsp"/>
+<%@include file="../include/menu.jsp" %>
+
+
+<table class="table table-striped">
+    <thead>
+    <th>#</th>
+    <th>Last Name</th>
+    <th>First Name</th>
+    <th>Phone</th>
+    <th>Action</th>
+
+    </thead>
+    <tbody>
     <jsp:useBean id="students" scope="request" type="java.util.List"/>
     <c:forEach var="student" items="${students}">
         <tr>
-            <td>${student.id}</td>
-            <td>${student.lastName}</td>
-            <td>${student.firstName}</td>
-            <td>${student.phone}</td>
-            <td>
-                <c:url value="/student-delete" var="delete_link">
-                    <c:param name="id" value="${student.id}"/>
-                </c:url>
-                <a href="${delete_link}">Delete</a>
-            </td>
+            <th scope="row">${student.id}</th>
+            <th>${student.lastName}</th>
+            <th>${student.firstName}</th>
+            <th>${student.phone}</th>
+            <th>
+
+                <a:auth path="/student-delete">
+                    <a href="${delete_link}">Delete</a>
+                </a:auth>
+            </th>
         </tr>
     </c:forEach>
+    </tbody>
 </table>
+<p>
+    <c:url value="/student-add" var="add" scope="page"/>
+    <a href="${add}">Add new Student</a>
+</p>
 
-</body>
-</html>
+<%@include file="../include/footer.jsp" %>

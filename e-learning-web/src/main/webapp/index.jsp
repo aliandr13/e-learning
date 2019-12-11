@@ -1,11 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<!DOCTYPE html>
 <html>
+<head>
+    <meta charset="UTF-8">
+    <title>Home Page</title>
+</head>
 <body>
-<h2>Hello World!</h2>
-<p>
-    Menu:
-<ul>
-    <li><a href="${pageContext.request.contextPath}/student-list">Student list</a></li>
-    <li><a href="${pageContext.request.contextPath}/student-add">Student Add</a></li>
-</ul>
+
+
+<h3>Index Page</h3>
+
+
 </body>
 </html>

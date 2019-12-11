@@ -1,23 +1,36 @@
-<%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
-<html>
-<head>
-    <title>Add Student</title>
-</head>
-<body>
+<%@include file="../include/header.jsp" %>
 <form method="post" action="${pageContext.request.contextPath}/student-add">
-    <label>First Name
-        <input type="text" name="firstName"/>
-    </label>
-    <label>Middle Name
-        <input type="text" name="middleName"/>
-    </label>
-    <label>Last Name
-        <input type="text" name="lastName"/>
-    </label>
-    <label>Phone
-        <input type="tel" name="phone"/>
-    </label>
-    <input type="submit">
+    <table>
+        <tr>
+            <td><label>First Name</label></td>
+            <td><input type="text" name="firstName"/></td>
+        </tr>
+        <tr>
+            <td><label>Middle Name</label></td>
+            <td><input type="text" name="middleName"/></td>
+        </tr>
+        <tr>
+            <td><label>Last Name</label></td>
+            <td><input type="text" name="lastName"/></td>
+        </tr>
+        <tr>
+            <td><label>Phone</label></td>
+            <td><input type="text" name="phone"/></td>
+        </tr>
+        <tr>
+            <td><label for="course">Course</label></td>
+            <td>
+                <select id="course" name="courseId">
+                    <c:forEach var="course" items="${courses}">
+                        <option value="${course.id}"
+                                <c:if test="${courseSelected == course.id}">selected='selected'</c:if>  >${course.name}</option>
+                    </c:forEach>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit"></td>
+        </tr>
+    </table>
 </form>
-</body>
-</html>
+<%@include file="../include/footer.jsp" %>
