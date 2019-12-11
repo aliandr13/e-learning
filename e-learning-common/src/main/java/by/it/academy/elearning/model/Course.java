@@ -4,8 +4,17 @@ package by.it.academy.elearning.model;
 import java.util.Objects;
 
 public class Course {
+
     private Long id;
     private String name;
+
+    public Course() {
+    }
+
+    public Course(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     public Long getId() {
         return id;

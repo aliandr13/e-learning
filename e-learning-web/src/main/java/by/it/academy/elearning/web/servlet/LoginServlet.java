@@ -19,27 +19,24 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getSession(true).setAttribute("elearning.user.Locale", "ru");
         req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String userName = req.getParameter("userName");
+        String email = req.getParameter("email");
         String password = req.getParameter("password");
-        String rememberMeStr = req.getParameter("rememberMe");
+        String rememberMeStr = req.getParameter("remember");
         boolean remember = "Y".equals(rememberMeStr);
-
-        req.getParameter("language");
 
         String errorMsg = "";
         boolean hasError = false;
 
-        if (userName == null || userName.length() == 0 || password == null || password.length() == 0) {
+        if (email == null || email.length() == 0 || password == null || password.length() == 0) {
             hasError = true;
             errorMsg = "UserName and password should not be empty; ";
         } else {
-            Optional<User> user = userService.findUser(userName, password);
+            Optional<User> user = userService.findUser(email, password);
             if (user.isEmpty()) {
                 hasError = true;
                 errorMsg = "Invalid user name or password";
@@ -50,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 
         if (hasError) {
             req.setAttribute("errorString", errorMsg);
-            req.setAttribute("user", new User(userName, password));
+            req.setAttribute("email", email);
             req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
         } else {
             resp.sendRedirect(req.getContextPath() + "/home");

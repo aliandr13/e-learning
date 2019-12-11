@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/*", dispatcherTypes = DispatcherType.REQUEST)
+@WebFilter(urlPatterns = {"/user/*", "/admin/*"}, dispatcherTypes = DispatcherType.REQUEST)
 public class AuthFilter extends HttpFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthFilter.class);
@@ -26,10 +26,7 @@ public class AuthFilter extends HttpFilter {
         logger.debug("url: {}", req.getRequestURI());
         User user = (User) session.getAttribute("user");
 
-        if (user == null
-                && !req.getRequestURI().endsWith("/")
-                && !req.getRequestURI().endsWith("/home")
-                && !req.getRequestURI().endsWith("/login")) {
+        if (user == null) {
             res.sendRedirect(req.getContextPath() + "/login");
 
         } else {
