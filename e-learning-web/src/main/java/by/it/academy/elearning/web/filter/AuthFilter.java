@@ -1,7 +1,7 @@
 package by.it.academy.elearning.web.filter;
 
-import by.it.academy.elearning.web.dto.UserAccount;
 import by.it.academy.elearning.web.util.SessionUtils;
+import by.it.academy.elearning.web.dto.UserAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
