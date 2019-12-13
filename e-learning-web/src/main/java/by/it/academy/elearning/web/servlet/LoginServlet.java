@@ -3,6 +3,7 @@ package by.it.academy.elearning.web.servlet;
 import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.service.UserService;
 import by.it.academy.elearning.service.UserServiceImpl;
+import by.it.academy.elearning.web.util.CookieUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -45,12 +46,15 @@ public class LoginServlet extends HttpServlet {
                 errorMsg = "Invalid user name or password";
             } else {
                 req.getSession().setAttribute("user", user.get());
+                if (remember) {
+                    CookieUtils.storeUserCookie(resp, user.get().getId());
+                }
             }
         }
 
         if (hasError) {
             req.setAttribute("errorString", errorMsg);
-            req.setAttribute("user", new User(userName, password));
+            req.setAttribute("userName", userName);
             req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
         } else {
             resp.sendRedirect(req.getContextPath() + "/home");
