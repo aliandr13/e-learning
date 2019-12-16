@@ -1,5 +1,6 @@
 package by.it.academy.elearning.web.filter;
 
+import by.it.academy.elearning.web.dto.UserAccount;
 import by.it.academy.elearning.web.util.SessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebFilter(urlPatterns = "/*", dispatcherTypes = DispatcherType.REQUEST)
 public class AuthFilter extends HttpFilter {
@@ -21,7 +23,8 @@ public class AuthFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         logger.debug("Auth filter start");
-        if (SessionUtils.getUserAccount(req).isPresent()
+        Optional<UserAccount> userAccount = SessionUtils.getUserAccount(req);
+        if (userAccount.isPresent()
                 || req.getRequestURI().endsWith("/")
                 || req.getRequestURI().endsWith("/home")
                 || req.getRequestURI().endsWith("/login")) {

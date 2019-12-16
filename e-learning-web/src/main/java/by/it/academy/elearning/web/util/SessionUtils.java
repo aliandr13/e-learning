@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class SessionUtils {
 
-    private static final String SESSION_ATTR_NAME = "auth.user.name";
+    private static final String SESSION_ATTR_NAME = "auth_user";
 
     public static void setUserSession(HttpServletRequest request, UserAccount user) {
         request.getSession().setAttribute(SESSION_ATTR_NAME, user);

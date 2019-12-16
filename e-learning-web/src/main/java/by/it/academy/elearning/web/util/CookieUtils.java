@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 public class CookieUtils {
 
-    private static final String AUTH_USER_COOKIE_NAME = "elaerning.login.user.id";
+    private static final String AUTH_USER_COOKIE_NAME = "e_learning_user_id";
     public static final int MAX_AGE_24H = 24 * 60 * 60;
 
     public static void storeUserCookie(HttpServletResponse response, Long userId) {
@@ -20,12 +20,17 @@ public class CookieUtils {
     }
 
     public static Optional<Long> getAuthUserId(HttpServletRequest request) {
-        return Stream.of(request.getCookies())
-                .filter(c -> c.getName().equals(AUTH_USER_COOKIE_NAME))
-                .map(Cookie::getValue)
-                .filter(StringUtils::isNumeric)
-                .map(Long::valueOf)
-                .findFirst();
+        Cookie[] cookies = request.getCookies();
+        if (cookies == null) {
+            return Optional.empty();
+        } else {
+            return Stream.of(cookies)
+                    .filter(c -> c.getName().equals(AUTH_USER_COOKIE_NAME))
+                    .map(Cookie::getValue)
+                    .filter(StringUtils::isNumeric)
+                    .map(Long::valueOf)
+                    .findFirst();
+        }
     }
 
     public static void removeCookie(HttpServletResponse response) {

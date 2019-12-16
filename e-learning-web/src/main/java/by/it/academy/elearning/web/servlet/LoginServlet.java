@@ -3,7 +3,9 @@ package by.it.academy.elearning.web.servlet;
 import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.service.UserService;
 import by.it.academy.elearning.service.UserServiceImpl;
+import by.it.academy.elearning.web.dto.UserAccount;
 import by.it.academy.elearning.web.util.CookieUtils;
+import by.it.academy.elearning.web.util.SessionUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,8 +33,6 @@ public class LoginServlet extends HttpServlet {
         String rememberMeStr = req.getParameter("rememberMe");
         boolean remember = "Y".equals(rememberMeStr);
 
-        req.getParameter("language");
-
         String errorMsg = "";
         boolean hasError = false;
 
@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
                 hasError = true;
                 errorMsg = "Invalid user name or password";
             } else {
-                req.getSession().setAttribute("user", user.get());
+                SessionUtils.setUserSession(req, new UserAccount(user.get()));
                 if (remember) {
                     CookieUtils.storeUserCookie(resp, user.get().getId());
                 }

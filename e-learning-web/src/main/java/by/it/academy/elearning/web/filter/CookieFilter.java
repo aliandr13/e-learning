@@ -8,6 +8,7 @@ import by.it.academy.elearning.web.util.SessionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.DispatcherType;
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebFilter;
@@ -15,8 +16,9 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
-@WebFilter("/login")
+@WebFilter(urlPatterns = "/*", dispatcherTypes = DispatcherType.REQUEST)
 public class CookieFilter extends HttpFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(CookieFilter.class);
@@ -25,7 +27,8 @@ public class CookieFilter extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         logger.debug("Cookie filter start");
-        if (SessionUtils.getUserAccount(req).isEmpty()) {
+        Optional<UserAccount> userAccount = SessionUtils.getUserAccount(req);
+        if (userAccount.isEmpty()) {
             CookieUtils.getAuthUserId(req).flatMap(userService::findUserById)
                     .ifPresent(u -> SessionUtils.setUserSession(req, new UserAccount(u)));
         }

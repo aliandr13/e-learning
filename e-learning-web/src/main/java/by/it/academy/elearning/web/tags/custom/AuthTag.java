@@ -1,10 +1,13 @@
 package by.it.academy.elearning.web.tags.custom;
 
 import by.it.academy.elearning.model.User;
+import by.it.academy.elearning.web.dto.UserAccount;
+import by.it.academy.elearning.web.util.SessionUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.jstl.core.ConditionalTagSupport;
+import java.util.Optional;
 
 public class AuthTag extends ConditionalTagSupport {
 
@@ -14,9 +17,9 @@ public class AuthTag extends ConditionalTagSupport {
     protected boolean condition() {
         HttpServletRequest request = (HttpServletRequest) pageContext.getRequest();
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        Optional<UserAccount> user = SessionUtils.getUserAccount(request);
 
-        return user != null && user.getRole().equals("admin");
+        return user.isPresent() && user.get().getRole().equals("admin");
     }
 
     public void setPath(String path) {
