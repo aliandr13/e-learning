@@ -16,7 +16,6 @@ import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 @WebFilter(urlPatterns = "/*", dispatcherTypes = DispatcherType.REQUEST)
 public class CookieFilter extends HttpFilter {
@@ -26,10 +25,11 @@ public class CookieFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        logger.debug("Cookie filter start");
-        Optional<UserAccount> userAccount = SessionUtils.getUserAccount(req);
-        if (userAccount.isEmpty()) {
-            CookieUtils.getAuthUserId(req).flatMap(userService::findUserById)
+        logger.debug("Cookie filter");
+
+        if (SessionUtils.getUserAccount(req).isEmpty()) {
+            CookieUtils.getAuthUserId(req)
+                    .flatMap(userService::findUserById)
                     .ifPresent(u -> SessionUtils.setUserSession(req, new UserAccount(u)));
         }
         super.doFilter(req, res, chain);

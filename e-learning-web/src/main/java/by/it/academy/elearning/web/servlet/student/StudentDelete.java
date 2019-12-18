@@ -1,4 +1,4 @@
-package by.it.academy.elearning.web.servlet;
+package by.it.academy.elearning.web.servlet.student;
 
 import by.it.academy.elearning.service.StudentService;
 import by.it.academy.elearning.service.StudentServiceImpl;
@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/student-delete")
+@WebServlet(urlPatterns = "/user/student-delete")
 public class StudentDelete extends HttpServlet {
 
     private final StudentService service = StudentServiceImpl.getService();

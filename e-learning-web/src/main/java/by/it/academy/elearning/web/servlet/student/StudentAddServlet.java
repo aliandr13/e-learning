@@ -1,4 +1,4 @@
-package by.it.academy.elearning.web.servlet;
+package by.it.academy.elearning.web.servlet.student;
 
 import by.it.academy.elearning.model.Student;
 import by.it.academy.elearning.service.CourseServiceImp;
@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/student-add")
+@WebServlet(urlPatterns = "/user/student-add")
 public class StudentAddServlet extends HttpServlet {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(StudentAddServlet.class);

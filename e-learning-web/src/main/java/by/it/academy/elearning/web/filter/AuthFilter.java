@@ -15,19 +15,16 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebFilter(urlPatterns = "/*", dispatcherTypes = DispatcherType.REQUEST)
+@WebFilter(urlPatterns = {"/user/*", "/admin/*"}, dispatcherTypes = DispatcherType.REQUEST)
 public class AuthFilter extends HttpFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthFilter.class);
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        logger.debug("Auth filter start");
+        logger.debug("Auth filter");
         Optional<UserAccount> userAccount = SessionUtils.getUserAccount(req);
-        if (userAccount.isPresent()
-                || req.getRequestURI().endsWith("/")
-                || req.getRequestURI().endsWith("/home")
-                || req.getRequestURI().endsWith("/login")) {
+        if (userAccount.isPresent()) {
             super.doFilter(req, res, chain);
         } else {
             res.sendRedirect(req.getContextPath() + "/login");
