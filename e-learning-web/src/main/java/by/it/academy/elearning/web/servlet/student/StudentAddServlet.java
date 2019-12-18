@@ -41,7 +41,7 @@ public class StudentAddServlet extends HttpServlet {
                 req.getParameter("phone"));
 
         service.add(student);
-        resp.sendRedirect(req.getContextPath() + "/student-list");
+        resp.sendRedirect(req.getContextPath() + "/user/student-list");
 
     }
 }

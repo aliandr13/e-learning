@@ -28,6 +28,6 @@ public class StudentDelete extends HttpServlet {
     private void deleteStudent(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         Long studentId = Long.valueOf(req.getParameter("id"));
         service.delete(studentId);
-        resp.sendRedirect(req.getContextPath() + "/student-list");
+        resp.sendRedirect(req.getContextPath() + "/user/student-list");
     }
 }
