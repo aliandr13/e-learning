@@ -4,9 +4,8 @@ package by.it.academy.elearning.model;
 import java.util.Objects;
 
 public class Course {
-
-    private final Long id;
-    private final String name;
+    private Long id;
+    private String name;
 
     public Course(Long id, String name) {
         this.id = id;
