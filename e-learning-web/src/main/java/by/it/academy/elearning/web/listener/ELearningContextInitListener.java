@@ -9,9 +9,8 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 import javax.sql.DataSource;
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 @WebListener()
 public class ELearningContextInitListener implements ServletContextListener {
@@ -22,13 +21,13 @@ public class ELearningContextInitListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("Context initialized");
         try {
-            URL resource = this.getClass().getClassLoader().getResource("hikari.properties");
-            ElDataSource.init(new File(resource.getFile()));
+            ResourceBundle bundle = ResourceBundle.getBundle("mysql_hikari");
+            ElDataSource.configure(bundle);
             DataSource dataSource = ElDataSource.getDataSource();
             DbMigration.migrate(dataSource);
-        } catch (IOException e) {
+        } catch (Exception e) {
             logger.error("error", e);
-            throw new RuntimeException("Datasource initialisation error");
+            throw new RuntimeException("Datasource initialisation error", e);
         }
     }
 
