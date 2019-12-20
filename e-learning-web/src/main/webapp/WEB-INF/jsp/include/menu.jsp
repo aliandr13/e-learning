@@ -5,9 +5,9 @@
 
     <a href="${pageContext.request.contextPath}/">Home</a>
     |
-    <a href="${pageContext.request.contextPath}/student-list">Student List</a>
+    <a href="${pageContext.request.contextPath}/user/student-list">Student List</a>
     |
-    <a href="${pageContext.request.contextPath}/userInfo">My Account Info</a>
+    <a href="${pageContext.request.contextPath}/user/userInfo">My Account Info</a>
     |
     <a href="${pageContext.request.contextPath}/login">Login</a>
 

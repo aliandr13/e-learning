@@ -1,5 +1,5 @@
 <%@include file="../include/header.jsp" %>
-<form method="post" action="${pageContext.request.contextPath}/student-add">
+<form method="post" action="${pageContext.request.contextPath}/user/student-add">
     <table>
         <tr>
             <td><label>First Name</label></td>

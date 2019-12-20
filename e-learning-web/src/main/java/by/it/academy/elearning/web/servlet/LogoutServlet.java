@@ -1,5 +1,7 @@
 package by.it.academy.elearning.web.servlet;
 
+import by.it.academy.elearning.web.util.CookieUtils;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,6 +19,7 @@ public class LogoutServlet extends HttpServlet {
         if (session != null) {
             session.invalidate();
         }
+        CookieUtils.removeCookie(resp);
         resp.sendRedirect(req.getContextPath() + "/home");
     }
 }
