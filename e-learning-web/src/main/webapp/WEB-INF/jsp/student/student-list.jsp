@@ -25,8 +25,10 @@
             <th>${student.firstName}</th>
             <th>${student.phone}</th>
             <th>
-
-                <a:auth path="/student-delete">
+                <a:auth path="/user/student-delete">
+                    <c:url value="/user/student-add" var="delete_link" scope="page">
+                        <c:param name="id" value="${student.id}"/>
+                    </c:url>
                     <a href="${delete_link}">Delete</a>
                 </a:auth>
             </th>
@@ -35,7 +37,7 @@
     </tbody>
 </table>
 <p>
-    <c:url value="/student-add" var="add" scope="page"/>
+    <c:url value="/user/student-add" var="add" scope="page"/>
     <a href="${add}">Add new Student</a>
 </p>
 

@@ -1,6 +1,7 @@
 package by.it.academy.elearning.web.filter;
 
-import by.it.academy.elearning.model.User;
+import by.it.academy.elearning.web.util.SessionUtils;
+import by.it.academy.elearning.web.dto.UserAccount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,29 +12,22 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.Optional;
 
-@WebFilter(urlPatterns = "/*", dispatcherTypes = DispatcherType.REQUEST)
+@WebFilter(urlPatterns = {"/user/*", "/admin/*"}, dispatcherTypes = DispatcherType.REQUEST)
 public class AuthFilter extends HttpFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthFilter.class);
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        HttpSession session = req.getSession();
-
-        logger.debug("url: {}", req.getRequestURI());
-        User user = (User) session.getAttribute("user");
-
-        if (user == null
-                && !req.getRequestURI().endsWith("/")
-                && !req.getRequestURI().endsWith("/home")
-                && !req.getRequestURI().endsWith("/login")) {
-            res.sendRedirect(req.getContextPath() + "/login");
-
-        } else {
+        logger.debug("Auth filter");
+        Optional<UserAccount> userAccount = SessionUtils.getUserAccount(req);
+        if (userAccount.isPresent()) {
             super.doFilter(req, res, chain);
+        } else {
+            res.sendRedirect(req.getContextPath() + "/login");
         }
     }
 }
