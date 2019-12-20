@@ -1,9 +1,9 @@
 package by.it.academy.elearning.web.servlet.student;
 
 import by.it.academy.elearning.model.Student;
-import by.it.academy.elearning.service.CourseServiceImp;
 import by.it.academy.elearning.service.StudentService;
-import by.it.academy.elearning.service.StudentServiceImpl;
+import by.it.academy.elearning.service.impl.CourseServiceImp;
+import by.it.academy.elearning.service.impl.StudentServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

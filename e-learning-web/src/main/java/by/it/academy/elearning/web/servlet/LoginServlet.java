@@ -2,7 +2,7 @@ package by.it.academy.elearning.web.servlet;
 
 import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.service.UserService;
-import by.it.academy.elearning.service.UserServiceImpl;
+import by.it.academy.elearning.service.impl.UserServiceImpl;
 import by.it.academy.elearning.web.dto.UserAccount;
 import by.it.academy.elearning.web.util.CookieUtils;
 import by.it.academy.elearning.web.util.SessionUtils;

@@ -3,6 +3,7 @@ package by.it.academy.elearning.service;
 import by.it.academy.elearning.model.Student;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Student service interface
@@ -15,6 +16,15 @@ public interface StudentService {
      * @return list of found students
      */
     List<Student> getAllStudents();
+
+    /**
+     * Gets student by id
+     *
+     * @param id id
+     * @return Optional of student
+     */
+    Optional<Student> getById(Long id);
+
 
     /**
      * Add new student
