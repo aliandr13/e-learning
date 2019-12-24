@@ -59,7 +59,7 @@ public class StudentDaoImpl extends AbstractDao implements StudentDao {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_STUDENT_BY_ID)) {
 
-            statement.setObject(1, id);
+            statement.setLong(1, id);
 
             resultSet = statement.executeQuery();
 
@@ -92,7 +92,7 @@ public class StudentDaoImpl extends AbstractDao implements StudentDao {
     public int delete(Long id) throws SQLException {
         try (Connection connection = getConnection();
              PreparedStatement statement = connection.prepareStatement(DELETE_STUDENT_BY_ID)) {
-            statement.setObject(1, id);
+            statement.setLong(1, id);
             return statement.executeUpdate();
         }
     }
