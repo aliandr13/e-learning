@@ -15,12 +15,26 @@ import java.util.Optional;
 @WebServlet(urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 
-    private final UserService userService = UserServiceImpl.getInstance();
+    public static final String LOGIN_JSP = "/WEB-INF/jsp/login.jsp";
+    public static final String ERROR_STRING_ATTR_NAME = "errorString";
+    public static final String USER_ATTR_NAME = "user";
+    public static final String SHOULD_NOT_BE_EMPTY = "UserName and password should not be empty; ";
+    public static final String INVALID_USER_NAME_OR_PASSWORD = "Invalid user name or password";
+
+    private UserService userService;
+
+    public LoginServlet() {
+        this.userService = UserServiceImpl.getInstance();
+    }
+
+    public LoginServlet(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getSession(true).setAttribute("elearning.user.Locale", "ru");
-        req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
+        req.getRequestDispatcher(LOGIN_JSP).forward(req, resp);
     }
 
     @Override
@@ -30,28 +44,26 @@ public class LoginServlet extends HttpServlet {
         String rememberMeStr = req.getParameter("rememberMe");
         boolean remember = "Y".equals(rememberMeStr);
 
-        req.getParameter("language");
-
         String errorMsg = "";
         boolean hasError = false;
 
         if (userName == null || userName.length() == 0 || password == null || password.length() == 0) {
             hasError = true;
-            errorMsg = "UserName and password should not be empty; ";
+            errorMsg = SHOULD_NOT_BE_EMPTY;
         } else {
             Optional<User> user = userService.findUser(userName, password);
             if (user.isEmpty()) {
                 hasError = true;
-                errorMsg = "Invalid user name or password";
+                errorMsg = INVALID_USER_NAME_OR_PASSWORD;
             } else {
-                req.getSession().setAttribute("user", user.get());
+                req.getSession().setAttribute(USER_ATTR_NAME, user.get());
             }
         }
 
         if (hasError) {
-            req.setAttribute("errorString", errorMsg);
-            req.setAttribute("user", new User(userName, password));
-            req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, resp);
+            req.setAttribute(ERROR_STRING_ATTR_NAME, errorMsg);
+            req.setAttribute(USER_ATTR_NAME, userName);
+            req.getRequestDispatcher(LOGIN_JSP).forward(req, resp);
         } else {
             resp.sendRedirect(req.getContextPath() + "/home");
         }
