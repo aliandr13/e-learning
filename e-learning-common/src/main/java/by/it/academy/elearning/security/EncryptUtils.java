@@ -8,7 +8,6 @@ import java.util.Base64;
 
 public final class EncryptUtils {
 
-
     public static final String STRING_512 = "%0128x";
     public static final String STRING_256 = "%064x";
     public static final int SALT_SIZE = 20;

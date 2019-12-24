@@ -38,7 +38,7 @@ public final class ElDataSource {
 
     private static void check() throws SQLException {
         if (dataSource == null) {
-            throw new SQLException("Datasource is null; Need to call init() first");
+            throw new SQLException("Datasource is null; Need to call configure() first");
         }
     }
 
