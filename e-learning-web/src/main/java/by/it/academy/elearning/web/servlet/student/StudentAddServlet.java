@@ -1,5 +1,6 @@
 package by.it.academy.elearning.web.servlet.student;
 
+import by.it.academy.elearning.model.Group;
 import by.it.academy.elearning.model.Student;
 import by.it.academy.elearning.service.StudentService;
 import by.it.academy.elearning.service.impl.CourseServiceImp;
@@ -38,7 +39,8 @@ public class StudentAddServlet extends HttpServlet {
                 req.getParameter("firstName"),
                 req.getParameter("middleName"),
                 req.getParameter("lastName"),
-                req.getParameter("phone"));
+                req.getParameter("phone")
+                , "", new Group());
 
         service.add(student);
         resp.sendRedirect(req.getContextPath() + "/user/student-list");

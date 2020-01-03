@@ -1,6 +1,7 @@
 package by.it.academy.elearning.dao.impl;
 
 import by.it.academy.elearning.dao.StudentDao;
+import by.it.academy.elearning.model.Group;
 import by.it.academy.elearning.model.Student;
 import org.slf4j.LoggerFactory;
 
@@ -121,6 +122,6 @@ public class StudentDaoImpl extends AbstractDao implements StudentDao {
         String middleName = resultSet.getString("middle_name");
         String lastName = resultSet.getString("last_name");
         String phone = resultSet.getString("phone");
-        return new Student(userId, firstName, middleName, lastName, phone);
+        return new Student(userId, firstName, middleName, lastName, phone, "", new Group());
     }
 }
