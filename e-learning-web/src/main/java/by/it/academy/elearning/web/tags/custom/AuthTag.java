@@ -19,7 +19,9 @@ public class AuthTag extends ConditionalTagSupport {
         HttpSession session = request.getSession();
         Optional<UserAccount> user = SessionUtils.getUserAccount(request);
 
-        return user.isPresent() && user.get().getRole().equals("admin");
+        return user.isPresent() && (
+                user.get().getRole().equals("ADMIN")
+        );
     }
 
     public void setPath(String path) {

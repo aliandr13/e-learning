@@ -2,6 +2,7 @@ package by.it.academy.elearning.web.servlet.student;
 
 import by.it.academy.elearning.service.StudentService;
 import by.it.academy.elearning.service.impl.StudentServiceImpl;
+import by.it.academy.elearning.web.init.ServerConfig;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,9 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet(urlPatterns = "/user/student-delete")
-public class StudentDelete extends HttpServlet {
+public class StudentDeleteServlet extends HttpServlet {
 
-    private final StudentService service = StudentServiceImpl.getService();
+    private StudentService service;
+
+    public StudentDeleteServlet(StudentService service) {
+        this.service = service;
+    }
+
+    public StudentDeleteServlet() {
+        this.service = ServerConfig.getStudentService();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

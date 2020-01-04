@@ -2,7 +2,7 @@ package by.it.academy.elearning.web.servlet.student;
 
 import by.it.academy.elearning.model.Student;
 import by.it.academy.elearning.service.StudentService;
-import by.it.academy.elearning.service.impl.StudentServiceImpl;
+import by.it.academy.elearning.web.init.ServerConfig;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,13 +15,33 @@ import java.util.List;
 @WebServlet(urlPatterns = "/user/student-list")
 public class StudentListServlet extends HttpServlet {
 
-    private final StudentService service = StudentServiceImpl.getService();
+    public static final String STUDENTS_JSP = "/WEB-INF/jsp/student/student-list.jsp";
+    public static final String STUDENTS = "students";
+    public static final String GROUP_ID_PARAM = "group_id";
+
+    private StudentService service;
+
+    public StudentListServlet(StudentService service) {
+        this.service = service;
+    }
+
+    public StudentListServlet() {
+        this.service = ServerConfig.getStudentService();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Student> allStudents = service.getAllStudents();
-        req.setAttribute("students", allStudents);
-        req.getRequestDispatcher("/WEB-INF/jsp/student/student-list.jsp")
-                .forward(req, resp);
+        String groupId = req.getParameter(GROUP_ID_PARAM);
+
+        List<Student> students;
+
+        if (groupId != null) {
+            students = service.getStudentsByGroup(Long.valueOf(groupId));
+        } else {
+            students = service.getAllStudents();
+        }
+
+        req.setAttribute(STUDENTS, students);
+        req.getRequestDispatcher(STUDENTS_JSP).forward(req, resp);
     }
 }

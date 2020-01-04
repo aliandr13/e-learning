@@ -1,39 +1,39 @@
 CREATE TABLE course
 (
-    id   int PRIMARY KEY AUTO_INCREMENT,
-    name varchar(50) NOT NULL
+    course_id   int PRIMARY KEY AUTO_INCREMENT,
+    course_name varchar(50) NOT NULL
 );
 
-INSERT INTO course(name)
+INSERT INTO course(course_name)
 VALUES ('Java'),
        ('Python'),
        ('IOS');
 
 CREATE TABLE `group`
 (
-    id        BIGINT primary key AUTO_INCREMENT,
-    name      VARCHAR(100) NOT NULL,
-    course_id int          NOT NULL,
-    startDate timestamp,
+    group_id   BIGINT primary key AUTO_INCREMENT,
+    group_name VARCHAR(100) NOT NULL,
+    course_id  int          NOT NULL,
+    start_date Date,
     CONSTRAINT course_fk FOREIGN KEY (course_id)
-        REFERENCES course (id) ON DELETE RESTRICT
+        REFERENCES course (course_id) ON DELETE RESTRICT
 );
 
 CREATE TABLE user_info
 (
     id          BIGINT       NOT NULL PRIMARY KEY AUTO_INCREMENT,
     first_name  VARCHAR(255) NOT NULL,
-    middle_name VARCHAR(255) NOT NULL,
+    middle_name VARCHAR(255),
     last_name   VARCHAR(255) NOT NULL,
     email       VARCHAR(255) NOT NULL,
     phone       VARCHAR(50),
     group_id    BIGINT,
-    user_id     BIGINT       NOT NULL,
-    created     timestamp    not null default now(),
+    user_id     BIGINT,
+    created     timestamp    NOT NULL default now(),
     CONSTRAINT user_fk FOREIGN KEY (user_id)
         REFERENCES `user` (id) ON DELETE cascade,
     CONSTRAINT group_fk FOREIGN KEY (group_id)
-        REFERENCES `group` (id) ON DELETE RESTRICT
+        REFERENCES `group` (group_id) ON DELETE RESTRICT
 
 );
 

@@ -49,5 +49,6 @@ public interface StudentService {
      */
     Student update(Student student);
 
+    List<Student> getStudentsByGroup(Long groupId);
 }
 

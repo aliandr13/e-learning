@@ -1,8 +1,10 @@
 package by.it.academy.elearning.dao.impl;
 
 import by.it.academy.elearning.dao.StudentDao;
+import by.it.academy.elearning.dao.converter.StudentConverter;
 import by.it.academy.elearning.model.Group;
 import by.it.academy.elearning.model.Student;
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
@@ -10,22 +12,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 public class StudentDaoImpl extends AbstractDao implements StudentDao {
-
-    private static final StudentDaoImpl INSTANCE = new StudentDaoImpl();
 
     public static final String INSERT_STUDENT = "INSERT INTO student (first_name, middle_name, last_name, phone) VALUE (?,?,?,?)";
     public static final String SELECT_STUDENT_BY_ID = "SELECT * FROM student WHERE id = ?";
+    public static final String SELECT_STUDENT_BY_GROUP_ID = "SELECT * FROM user_info WHERE group_id = ?";
     public static final String SELECT_ALL_STUDENT = "SELECT * FROM user_info";
     public static final String UPDATE_STUDENT = "UPDATE student  SET first_name = ? , middle_name = ?, last_name = ?, phone = ? WHERE id = ?";
     public static final String DELETE_STUDENT_BY_ID = "DELETE FROM student WHERE id = ?";
 
-    private StudentDaoImpl() {
-        super(LoggerFactory.getLogger(StudentDaoImpl.class));
-    }
-
-    public static StudentDao getInstance() {
-        return INSTANCE;
+    public StudentDaoImpl() {
+        super(log);
     }
 
     @Override
@@ -65,7 +63,7 @@ public class StudentDaoImpl extends AbstractDao implements StudentDao {
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                result = Optional.of(mapStudent(resultSet));
+                result = Optional.of(StudentConverter.convert(resultSet));
             }
         } finally {
             closeQuietly(resultSet);
@@ -108,7 +106,7 @@ public class StudentDaoImpl extends AbstractDao implements StudentDao {
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                result.add(mapStudent(resultSet));
+                result.add(StudentConverter.convert(resultSet));
             }
         } finally {
             closeQuietly(resultSet);
@@ -116,12 +114,24 @@ public class StudentDaoImpl extends AbstractDao implements StudentDao {
         return result;
     }
 
-    private Student mapStudent(ResultSet resultSet) throws SQLException {
-        long userId = resultSet.getLong("id");
-        String firstName = resultSet.getString("first_name");
-        String middleName = resultSet.getString("middle_name");
-        String lastName = resultSet.getString("last_name");
-        String phone = resultSet.getString("phone");
-        return new Student(userId, firstName, middleName, lastName, phone, "", new Group());
+
+    @Override
+    public List<Student> getStudentsByGroup(Long groupId) throws SQLException {
+        ResultSet resultSet = null;
+        List<Student> result = new ArrayList<>();
+        try (Connection connection = getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_STUDENT_BY_GROUP_ID)) {
+
+            statement.setLong(1, groupId);
+            resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                result.add(StudentConverter.convert(resultSet));
+            }
+        } finally {
+            closeQuietly(resultSet);
+        }
+        return result;
     }
+
 }
