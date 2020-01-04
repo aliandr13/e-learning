@@ -40,8 +40,9 @@
     </table>
 </form>
 
-<p style="color:blue;">Admin User: tom password: tom001</p>
-<p style="color:blue;">Simple User: jerry password: jerry001</p>
+<p style="color:blue;">Admin user: admin password: a_pass</p>
+<p style="color:blue;">Teacher user: teacher password: t_pass</p>
+<p style="color:blue;">Student user: student password: s_pass</p>
 
 <jsp:include page="include/footer.jsp"/>
 </body>

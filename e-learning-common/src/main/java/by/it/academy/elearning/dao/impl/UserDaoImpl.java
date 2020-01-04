@@ -63,7 +63,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
                         rs.getString("user_name"),
                         rs.getString("password"),
                         rs.getString("salt"),
-                        rs.getString("role_name")
+                        rs.getString("role")
                 );
                 return Optional.of(user);
             }
