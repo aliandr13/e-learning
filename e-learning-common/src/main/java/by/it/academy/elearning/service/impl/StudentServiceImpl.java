@@ -2,13 +2,13 @@ package by.it.academy.elearning.service.impl;
 
 import by.it.academy.elearning.dao.StudentDao;
 import by.it.academy.elearning.dao.impl.StudentDaoImpl;
+import by.it.academy.elearning.exception.ELearningException;
 import by.it.academy.elearning.model.Student;
 import by.it.academy.elearning.service.StudentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,9 +32,10 @@ public class StudentServiceImpl implements StudentService {
         try {
             return studentDao.getAll();
         } catch (SQLException e) {
-            logger.error("Error while getting all students", e);
+            String msg = "Error while getting all students";
+            logger.error(msg, e);
+            throw new ELearningException(msg, e);
         }
-        return Collections.emptyList();
     }
 
     @Override
@@ -45,9 +46,10 @@ public class StudentServiceImpl implements StudentService {
             logger.debug("result {}", student);
             return student;
         } catch (SQLException e) {
-            logger.error("Error while getting student by id " + id, e);
+            String msg = "Error while getting student by id " + id;
+            logger.error(msg, e);
+            throw new ELearningException(msg, e);
         }
-        return Optional.empty();
     }
 
     @Override
