@@ -14,6 +14,7 @@
     <modules>
         <module>e-learning-common</module>
         <module>e-learning-web</module>
+        <module>common-hibernate</module>
     </modules>
 
     <properties>
