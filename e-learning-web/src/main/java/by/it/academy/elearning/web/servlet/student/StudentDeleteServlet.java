@@ -1,7 +1,6 @@
 package by.it.academy.elearning.web.servlet.student;
 
 import by.it.academy.elearning.service.StudentService;
-import by.it.academy.elearning.service.impl.StudentServiceImpl;
 import by.it.academy.elearning.web.init.ServerConfig;
 
 import javax.servlet.ServletException;

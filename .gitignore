@@ -23,3 +23,8 @@ pom.xml.versionsBackup​
 
 ## sonar
 .sonar
+
+#h2
+
+/test.mv.db
+/test.trace.db

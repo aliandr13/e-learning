@@ -15,7 +15,7 @@ import java.util.Optional;
 @Slf4j
 public class StudentDaoImpl extends AbstractDao implements StudentDao {
 
-    public static final String INSERT_STUDENT = "INSERT INTO student (first_name, middle_name, last_name, phone) VALUE (?,?,?,?)";
+    public static final String INSERT_STUDENT = "INSERT INTO student (first_name, middle_name, last_name, phone) VALUES (?,?,?,?)";
     public static final String SELECT_STUDENT_BY_ID = "SELECT * FROM student WHERE id = ?";
     public static final String SELECT_STUDENT_BY_GROUP_ID = "SELECT * FROM user_info WHERE group_id = ?";
     public static final String SELECT_ALL_STUDENT = "SELECT * FROM user_info";

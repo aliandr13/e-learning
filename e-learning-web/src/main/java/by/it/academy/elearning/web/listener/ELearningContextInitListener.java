@@ -25,7 +25,7 @@ public class ELearningContextInitListener implements ServletContextListener {
             ElDataSource.configure(bundle);
             DataSource dataSource = ElDataSource.getDataSource();
             DbMigration.migrate(dataSource);
-        } catch (Exception e) {
+        } catch (Throwable e) {
             logger.error("error", e);
             throw new RuntimeException("Datasource initialisation error", e);
         }

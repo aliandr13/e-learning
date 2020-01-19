@@ -15,8 +15,6 @@ public class CourseServiceImp {
         courses.add(new Course(1L, "Java"));
         courses.add(new Course(2L, "Python"));
         courses.add(new Course(3L, "IOS"));
-        courses.add(new Course(4L, "Ruby"));
-        courses.add(new Course(5L, "Android"));
     }
 
     public static CourseServiceImp getService() {

@@ -26,7 +26,7 @@
             <th>${student.phone}</th>
             <th>
                 <a:auth path="/user/student-delete">
-                    <c:url value="/user/student-add" var="delete_link" scope="page">
+                    <c:url value="/user/student-delete" var="delete_link" scope="page">
                         <c:param name="id" value="${student.id}"/>
                     </c:url>
                     <a href="${delete_link}">Delete</a>

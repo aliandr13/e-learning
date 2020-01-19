@@ -1,4 +1,3 @@
-<%@ page import="by.it.academy.elearning.web.servlet.student.StudentListServlet" %>
 <%@ page import="static by.it.academy.elearning.web.servlet.student.StudentListServlet.GROUP_ID_PARAM" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
@@ -16,6 +15,7 @@
     <th>Course Name</th>
     <th>Start date</th>
     <th>Students</th>
+    <th>Delete</th>
 
     </thead>
     <tbody>
@@ -32,14 +32,21 @@
                 </c:url>
                 <a href="${students_link}">View Students</a>
             </th>
+            <th>
+                <a:auth path="/user/student-delete">
+                    <c:url value="/user/group-delete" var="delete_link" scope="page">
+                        <c:param name="id" value="${group.id}"/>
+                    </c:url>
+                    <a href="${delete_link}">Delete</a>
+                </a:auth>
+            </th>
         </tr>
     </c:forEach>
     </tbody>
 </table>
 <p>
-    <c:url value="/user/student-add" var="add" scope="page"/>
-    <a href="${add}">Add new Student</a>
+    <c:url value="/user/group-add" var="add" scope="page"/>
+    <a href="${add}">Add new Group</a>
 </p>
 
 <%@include file="../include/footer.jsp" %>
-<%= GROUP_ID_PARAM %>
