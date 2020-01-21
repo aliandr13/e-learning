@@ -1,5 +1,5 @@
 <%@include file="../include/header.jsp" %>
-<form method="post" action="${pageContext.request.contextPath}/user/student-add">
+<form method="post" action="${pageContext.request.contextPath}/user/student-edit">
     <table>
         <tr>
             <td><label>First Name</label></td>
@@ -27,8 +27,9 @@
                 <select id="course" name="courseId">
                     <option value="-1"></option>
                     <c:forEach var="group" items="${groups}">
-                        <option value="${group.id}">${group.name}
-                        </option>
+                        <option value="${group.id}"
+                                <c:if test="${groupSelected == group.id}">selected='selected'</c:if>
+                        >${group.name}</option>
                     </c:forEach>
                 </select>
             </td>

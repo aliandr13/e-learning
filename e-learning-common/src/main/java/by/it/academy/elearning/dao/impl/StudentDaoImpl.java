@@ -18,7 +18,7 @@ public class StudentDaoImpl extends AbstractDao implements StudentDao {
     public static final String INSERT_STUDENT = "INSERT INTO student (first_name, middle_name, last_name, phone) VALUES (?,?,?,?)";
     public static final String SELECT_STUDENT_BY_ID = "SELECT * FROM student WHERE id = ?";
     public static final String SELECT_STUDENT_BY_GROUP_ID = "SELECT * FROM user_info WHERE group_id = ?";
-    public static final String SELECT_ALL_STUDENT = "SELECT * FROM user_info";
+    public static final String SELECT_ALL_STUDENT = "SELECT * FROM user_info left join `group` g on user_info.group_id = g.group_id";
     public static final String UPDATE_STUDENT = "UPDATE student  SET first_name = ? , middle_name = ?, last_name = ?, phone = ? WHERE id = ?";
     public static final String DELETE_STUDENT_BY_ID = "DELETE FROM student WHERE id = ?";
 

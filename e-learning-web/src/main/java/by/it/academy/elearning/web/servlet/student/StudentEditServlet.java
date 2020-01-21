@@ -14,28 +14,35 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Slf4j
-@WebServlet(urlPatterns = "/user/student-add")
-public class StudentAddServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/user/student-edit")
+public class StudentEditServlet extends HttpServlet {
 
     public static final String GROUPS = "groups";
-    public static final String STUDENT_ADD_JSP = "/WEB-INF/jsp/student/student-add.jsp";
+    public static final String STUDENT = "student";
+    public static final String STUDENT_EDIT_JSP = "/WEB-INF/jsp/student/student-edit.jsp";
     private StudentService studentService;
     private GroupService groupService;
 
-    public StudentAddServlet(StudentService studentService, GroupService groupService) {
+    public StudentEditServlet(StudentService studentService, GroupService groupService) {
         this.studentService = studentService;
         this.groupService = groupService;
     }
 
-    public StudentAddServlet() {
+    public StudentEditServlet() {
         this.studentService = ServerConfig.getStudentService();
         this.groupService = ServerConfig.getGroupService();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Long studentId = Long.valueOf(req.getParameter("id"));
         req.setAttribute(GROUPS, groupService.getAll());
-        req.getRequestDispatcher(STUDENT_ADD_JSP).forward(req, resp);
+        Student student = studentService.getById(studentId).orElseThrow(() -> new IllegalArgumentException("Student not found"));
+        req.setAttribute(STUDENT, student);
+        if (student.getGroup() != null) {
+            req.setAttribute("groupSelected", student.getGroup().getId());
+        }
+        req.getRequestDispatcher(STUDENT_EDIT_JSP).forward(req, resp);
     }
 
     @Override

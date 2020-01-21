@@ -14,9 +14,9 @@ import java.util.Optional;
 @Slf4j
 public class GroupDaoImpl extends AbstractDao implements GroupDao {
 
-    public static final String SELECT_ALL = "SELECT * FROM \"GROUP\" join course c on \"GROUP\".course_id = c.course_id";
-    public static final String INSERT_GROUP = "INSERT INTO \"GROUP\" (GROUP_NAME, COURSE_ID, START_DATE) VALUES (?, ?, ?)";
-    public static final String DELETE_GROUP_BY_ID = "DELETE FROM \"GROUP\" WHERE GROUP_ID = ?";
+    public static final String SELECT_ALL = "SELECT * FROM `group` join course c on `group`.course_id = c.course_id";
+    public static final String INSERT_GROUP = "INSERT INTO `group` (GROUP_NAME, COURSE_ID, START_DATE) VALUES (?, ?, ?)";
+    public static final String DELETE_GROUP_BY_ID = "DELETE FROM `group` WHERE GROUP_ID = ?";
 
 
     public GroupDaoImpl() {

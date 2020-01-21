@@ -13,6 +13,7 @@
     <th>Last Name</th>
     <th>First Name</th>
     <th>Phone</th>
+    <th>Group</th>
     <th>Action</th>
 
     </thead>
@@ -25,10 +26,20 @@
             <th>${student.firstName}</th>
             <th>${student.phone}</th>
             <th>
+                <c:choose>
+                    <c:when test="${student.group != null}">${student.group.name}</c:when>
+                    <c:otherwise>Not Assigned</c:otherwise>
+                </c:choose>
+            </th>
+            <th>
                 <a:auth path="/user/student-delete">
                     <c:url value="/user/student-delete" var="delete_link" scope="page">
                         <c:param name="id" value="${student.id}"/>
                     </c:url>
+                    <c:url value="/user/student-edit" var="edit_link" scope="page">
+                        <c:param name="id" value="${student.id}"/>
+                    </c:url>
+                    <a href="${edit_link}">Edit</a> |
                     <a href="${delete_link}">Delete</a>
                 </a:auth>
             </th>
