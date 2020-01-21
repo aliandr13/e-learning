@@ -11,6 +11,10 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Group {
 
+    public Group(Long id) {
+        this.id = id;
+    }
+
     private Long id;
     private String name;
     private Course course;

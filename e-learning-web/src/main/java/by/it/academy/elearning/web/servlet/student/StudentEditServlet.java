@@ -1,5 +1,6 @@
 package by.it.academy.elearning.web.servlet.student;
 
+import by.it.academy.elearning.model.Group;
 import by.it.academy.elearning.model.Student;
 import by.it.academy.elearning.service.GroupService;
 import by.it.academy.elearning.service.StudentService;
@@ -20,6 +21,7 @@ public class StudentEditServlet extends HttpServlet {
     public static final String GROUPS = "groups";
     public static final String STUDENT = "student";
     public static final String STUDENT_EDIT_JSP = "/WEB-INF/jsp/student/student-edit.jsp";
+    public static final String STUDENT_ID = "student_id";
     private StudentService studentService;
     private GroupService groupService;
 
@@ -37,6 +39,7 @@ public class StudentEditServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Long studentId = Long.valueOf(req.getParameter("id"));
         req.setAttribute(GROUPS, groupService.getAll());
+        req.setAttribute(STUDENT_ID, studentId);
         Student student = studentService.getById(studentId).orElseThrow(() -> new IllegalArgumentException("Student not found"));
         req.setAttribute(STUDENT, student);
         if (student.getGroup() != null) {
@@ -47,18 +50,18 @@ public class StudentEditServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String courseId = req.getParameter("courseId");
+        long courseId = Long.parseLong(req.getParameter("courseId"));
 
-        log.info("course id: {}", courseId);
-        Student student = new Student(null,
+        Student student = new Student(
+                Long.valueOf(req.getParameter(STUDENT_ID)),
                 req.getParameter("firstName"),
                 req.getParameter("middleName"),
                 req.getParameter("lastName"),
                 req.getParameter("phone"),
                 req.getParameter("email"),
-                null);
+                courseId != -1 ? new Group(courseId) : null);
 
-        studentService.add(student);
+        studentService.update(student);
         resp.sendRedirect(req.getContextPath() + "/user/student-list");
 
     }

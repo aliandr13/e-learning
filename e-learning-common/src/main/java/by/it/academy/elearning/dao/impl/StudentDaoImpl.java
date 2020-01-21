@@ -15,12 +15,12 @@ import java.util.Optional;
 @Slf4j
 public class StudentDaoImpl extends AbstractDao implements StudentDao {
 
-    public static final String INSERT_STUDENT = "INSERT INTO student (first_name, middle_name, last_name, phone) VALUES (?,?,?,?)";
-    public static final String SELECT_STUDENT_BY_ID = "SELECT * FROM student WHERE id = ?";
+    public static final String INSERT_STUDENT = "INSERT INTO user_info (first_name, middle_name, last_name, phone) VALUES (?,?,?,?)";
+    public static final String SELECT_STUDENT_BY_ID = "SELECT * FROM user_info left join `group` g on user_info.group_id = g.group_id WHERE id = ?";
     public static final String SELECT_STUDENT_BY_GROUP_ID = "SELECT * FROM user_info WHERE group_id = ?";
     public static final String SELECT_ALL_STUDENT = "SELECT * FROM user_info left join `group` g on user_info.group_id = g.group_id";
-    public static final String UPDATE_STUDENT = "UPDATE student  SET first_name = ? , middle_name = ?, last_name = ?, phone = ? WHERE id = ?";
-    public static final String DELETE_STUDENT_BY_ID = "DELETE FROM student WHERE id = ?";
+    public static final String UPDATE_STUDENT = "UPDATE user_info  SET first_name = ? , middle_name = ?, last_name = ?, phone = ?, email =?, group_id =? WHERE id = ?";
+    public static final String DELETE_STUDENT_BY_ID = "DELETE FROM user_info  WHERE id = ?";
 
     public StudentDaoImpl() {
         super(log);
@@ -63,7 +63,7 @@ public class StudentDaoImpl extends AbstractDao implements StudentDao {
             resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                result = Optional.of(StudentConverter.convert(resultSet));
+                result = Optional.of(StudentConverter.convert(resultSet, true));
             }
         } finally {
             closeQuietly(resultSet);
@@ -81,7 +81,9 @@ public class StudentDaoImpl extends AbstractDao implements StudentDao {
             statement.setString(2, student.getMiddleName());
             statement.setString(3, student.getLastName());
             statement.setString(4, student.getPhone());
-            statement.setLong(5, student.getId());
+            statement.setString(5, student.getEmail());
+            statement.setLong(6, student.getGroup() != null ? student.getGroup().getId() : null);
+            statement.setLong(7, student.getId());
 
             return statement.executeUpdate();
         }
@@ -106,7 +108,7 @@ public class StudentDaoImpl extends AbstractDao implements StudentDao {
             resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                result.add(StudentConverter.convert(resultSet));
+                result.add(StudentConverter.convert(resultSet, true));
             }
         } finally {
             closeQuietly(resultSet);
