@@ -1,49 +1,45 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-         pageEncoding="UTF-8" %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 
 
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Login page">
+    <meta name="generator" content="Jekyll v3.8.6">
     <title>Login</title>
-</head>
-<body>
-<%@include file="include/header.jsp"%>
-<%@include file="include/menu.jsp" %>
 
-<h3>Login Page</h3>
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.4/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Custom styles for this template -->
+    <link href="https://getbootstrap.com/docs/4.4/examples/sign-in/signin.css" rel="stylesheet">
+
+</head>
+<body class="text-center">
+
 <p style="color: red;">${errorString}</p>
 
+<form class="form-signin" method="POST" action="${pageContext.request.contextPath}/login">
+    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" id="inputEmail" name="userName" class="form-control" placeholder="Email address" required
+           autofocus value="${userName}">
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
+    <div class="checkbox mb-3">
+        <label>
+            <input type="checkbox" value="remember-me"> Remember me
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    <p class="mt-5 mb-3 text-muted">
+        Admin user: admin password: a_pass<br>
+        Teacher user: teacher password: t_pass<br>
+        Student user: student password: s_pass</p>
 
-<form method="POST" action="${pageContext.request.contextPath}/login">
-    <table border="0">
-        <tr>
-            <td><fmt:message key="login.page.user.name"/></td>
-            <td><input type="text" name="userName" value="${userName}"/></td>
-        </tr>
-        <tr>
-            <td><fmt:message key="login.page.user.password"/></td>
-            <td><input type="password" name="password" value=""/></td>
-        </tr>
-        <tr>
-            <td><fmt:message key="login.page.user.remember"/></td>
-            <td><input type="checkbox" name="rememberMe" value="Y"/></td>
-        </tr>
-        <tr>
-            <td colspan="2">
-                <input type="submit" value="<fmt:message key="login.page.submit"/>"/>
-                <a href="${pageContext.request.contextPath}/">Cancel</a>
-            </td>
-        </tr>
-    </table>
+    <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
 </form>
-
-<p style="color:blue;">Admin user: admin password: a_pass</p>
-<p style="color:blue;">Teacher user: teacher password: t_pass</p>
-<p style="color:blue;">Student user: student password: s_pass</p>
-
-<jsp:include page="include/footer.jsp"/>
 </body>
 </html>
