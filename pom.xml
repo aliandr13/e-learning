@@ -12,8 +12,12 @@
     <name>e-learning</name>
 
     <modules>
-        <module>e-learning-common</module>
         <module>e-learning-web</module>
+        <module>e-learning-model</module>
+        <module>e-learning-dao</module>
+        <module>e-learning-service</module>
+        <module>e-learning-dao-sql</module>
+        <module>e-learning-dao-hibernate</module>
     </modules>
 
     <properties>
@@ -53,6 +57,13 @@
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.14.0</version>
                 <scope>test</scope>
             </dependency>
         </dependencies>

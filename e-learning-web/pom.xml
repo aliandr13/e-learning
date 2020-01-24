@@ -18,7 +18,7 @@
     <dependencies>
         <dependency>
             <groupId>by.it.academy.elearning</groupId>
-            <artifactId>e-learning-common</artifactId>
+            <artifactId>e-learning-service</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 
@@ -43,6 +43,12 @@
             <groupId>javax.servlet.jsp.jstl</groupId>
             <artifactId>jstl-api</artifactId>
             <version>1.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet.jsp</groupId>
+                    <artifactId>jsp-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.taglibs</groupId>
