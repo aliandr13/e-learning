@@ -43,13 +43,13 @@ public class StudentAddServlet extends HttpServlet {
         String courseId = req.getParameter("courseId");
 
         log.info("course id: {}", courseId);
-        Student student = new Student(null,
+        Student student = new Student(
                 req.getParameter("firstName"),
                 req.getParameter("middleName"),
                 req.getParameter("lastName"),
                 req.getParameter("phone"),
                 req.getParameter("email"),
-                null);
+                0.0f, null, null);
 
         studentService.add(student);
         resp.sendRedirect(req.getContextPath() + "/user/student-list");

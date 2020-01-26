@@ -1,9 +1,6 @@
 package by.it.academy.elearning;
 
-import by.it.academy.elearning.entity.Course;
-import by.it.academy.elearning.entity.Group;
-import by.it.academy.elearning.entity.Student;
-import by.it.academy.elearning.entity.Teacher;
+import by.it.academy.elearning.model.*;
 import by.it.academy.elearning.hibernate.HibernateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
@@ -17,7 +14,31 @@ import java.time.LocalDate;
 @Slf4j
 public class App {
     public static void main(String[] args) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        insert(HibernateUtil.getSessionFactory().openSession());
+
+        read(HibernateUtil.getSessionFactory().openSession());
+
+        HibernateUtil.shutdown();
+    }
+
+    private static void read(Session session) {
+        try {
+//            Transaction transaction = session.beginTransaction();
+
+
+            User user = session.get(User.class, 1L);
+            log.info("user {}", user);
+
+//            transaction.commit();
+        } catch (Throwable e) {
+            log.error("Some error", e);
+            session.getTransaction().rollback();
+        } finally {
+            session.close();
+        }
+    }
+
+    private static void insert(Session session) {
         try {
             Transaction transaction = session.beginTransaction();
 
@@ -31,35 +52,37 @@ public class App {
             session.save(group);
 
 
+            Role sr = new Role("STUDENT");
+            Role tr = new Role("TEACHER");
+            Role ar = new Role("ADMIN");
+
+            session.save(sr);
+            session.save(tr);
+            session.save(ar);
+
+            User user = User.builder()
+                    .login("admin")
+                    .password("5c5212a214c634002e7f970fa293746fb7d49c7cfc7087edecd4c32402c06007")
+                    .salt("SEZhwD0GPt9W099OZkx2y9kZzJc=")
+                    .role(sr).build();
+            session.save(user);
+
             Student student = Student.builder()
                     .grade(5.0f)
-                    .homeWork("hw")
                     .firstName("IVAN")
                     .lastName("LASTBANE")
                     .phone("1234567")
                     .email("mail@gmail.com")
                     .build();
+            student.setUser(user);
             session.save(student);
-            Teacher teacher = Teacher.builder()
-                    .work("hw")
-                    .firstName("IVAN")
-                    .lastName("LASTBANE")
-                    .phone("1234567")
-                    .email("mail@gmail.com")
-                    .build();
-            session.save(teacher);
 
-//            Teacher teacher = new Teacher("some work");
-//            session.save(teacher);
-
-
-            transaction.commit();
+              transaction.commit();
         } catch (Throwable e) {
             log.error("Some error", e);
             session.getTransaction().rollback();
         } finally {
             session.close();
         }
-        HibernateUtil.shutdown();
     }
 }

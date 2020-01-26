@@ -21,13 +21,7 @@
 
         <dependency>
             <groupId>by.it.academy.elearning</groupId>
-            <artifactId>e-learning-dao</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>by.it.academy.elearning</groupId>
-            <artifactId>e-learning-dao-sql</artifactId>
+            <artifactId>e-learning-dao-hibernate</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 

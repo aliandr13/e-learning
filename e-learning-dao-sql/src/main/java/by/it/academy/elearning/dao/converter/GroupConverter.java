@@ -22,11 +22,12 @@ public final class GroupConverter {
         Long group_id = rs.getLong("group_id");
         String groupName = rs.getString("group_name");
         if (groupName != null) {
+
+
             return new Group(
-                    group_id,
                     groupName,
-                    course,
                     startDate != null ? startDate.toLocalDate() : null
+                    , course
             );
         }
         return null;

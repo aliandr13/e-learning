@@ -12,8 +12,8 @@ public class UserAccount {
 
     public UserAccount(User user) {
         this.userId = String.valueOf(user.getId());
-        this.userName = user.getUserName();
-        this.role = user.getRole();
+        this.userName = user.getLogin();
+        this.role = user.getRole().getRoleName();
     }
 
     public UserAccount(String userId, String userName, String role) {

@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface UserDao extends DAO<User> {
 
-    Optional<User> getByUserName(String userName) throws SQLException;
+    Optional<User> getByLogin(String login) throws SQLException;
 
 }

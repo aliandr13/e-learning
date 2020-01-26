@@ -52,14 +52,15 @@ public class StudentEditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long courseId = Long.parseLong(req.getParameter("courseId"));
 
-        Student student = new Student(
-                Long.valueOf(req.getParameter(STUDENT_ID)),
-                req.getParameter("firstName"),
-                req.getParameter("middleName"),
-                req.getParameter("lastName"),
-                req.getParameter("phone"),
-                req.getParameter("email"),
-                courseId != -1 ? new Group(courseId) : null);
+        Student student =
+                Student.builder()
+                        .email(req.getParameter("email"))
+                        .firstName(req.getParameter("firstName"))
+                        .lastName(req.getParameter("lastName"))
+                        .middleName(req.getParameter("middleName"))
+                        .phone(req.getParameter("phone"))
+                        .group(courseId != -1 ? new Group(courseId) : null)
+                        .build();
 
         studentService.update(student);
         resp.sendRedirect(req.getContextPath() + "/user/student-list");

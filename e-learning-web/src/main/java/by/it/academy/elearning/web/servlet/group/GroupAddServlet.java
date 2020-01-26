@@ -45,10 +45,10 @@ public class GroupAddServlet extends HttpServlet {
 
         log.info("course id: {}", courseId);
         log.info("start date: {}", startDate);
-        Group group = new Group(null,
+        Group group = new Group(
                 req.getParameter("groupName"),
-                new Course(Long.parseLong(courseId), ""),
-                LocalDate.parse(startDate));
+                LocalDate.parse(startDate),
+                new Course(Long.parseLong(courseId), null));
 
         service.create(group);
         resp.sendRedirect(req.getContextPath() + "/user/group-list");

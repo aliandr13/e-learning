@@ -1,6 +1,7 @@
 package by.it.academy.elearning.dao.impl;
 
 import by.it.academy.elearning.dao.UserDao;
+import by.it.academy.elearning.model.Role;
 import by.it.academy.elearning.model.User;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +51,7 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
     }
 
     @Override
-    public Optional<User> getByUserName(String userName) throws SQLException {
+    public Optional<User> getByLogin(String userName) throws SQLException {
         ResultSet rs = null;
         try {
             PreparedStatement statement = getConnection().prepareStatement(SELECT_BY_USER_NAME);
@@ -59,12 +60,14 @@ public class UserDaoImpl extends AbstractDao implements UserDao {
             rs = statement.executeQuery();
 
             if (rs.next()) {
-                User user = new User(rs.getLong("id"),
+                User user = new User(
                         rs.getString("user_name"),
                         rs.getString("password"),
                         rs.getString("salt"),
-                        rs.getString("role")
+                        new Role(rs.getString("role"))
                 );
+                user.setId(rs.getLong("id"));
+
                 return Optional.of(user);
             }
         } finally {

@@ -23,7 +23,7 @@ public final class StudentConverter {
         if (withGroup) {
             group = GroupConverter.convert(rs);
         }
-        return new Student(userId, firstName, middleName, lastName, phone, email, group);
+        return new Student(firstName, middleName, lastName, phone, email, 0.0f, null, null);
     }
 
 

@@ -1,4 +1,4 @@
-package by.it.academy.elearning.entity;
+package by.it.academy.elearning.model;
 
 import lombok.*;
 
@@ -15,8 +15,8 @@ import java.util.Set;
 public class Teacher extends Person {
 
     @Builder
-    public Teacher(String firstName, String middleName, String lastName, String phone, String email, String work) {
-        super(firstName, middleName, lastName, phone, email);
+    public Teacher(String firstName, String middleName, String lastName, String phone, String email, String work, User user) {
+        super(firstName, middleName, lastName, phone, email, user);
         this.work = work;
     }
 

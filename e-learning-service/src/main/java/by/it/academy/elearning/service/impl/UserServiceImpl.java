@@ -17,7 +17,15 @@ public class UserServiceImpl implements UserService {
 
     private static final UserService INSTANCE = new UserServiceImpl();
 
-    private final UserDao userDao = UserDaoImpl.getInstance();
+    private final UserDao userDao;
+
+    public UserServiceImpl(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public UserServiceImpl() {
+        this.userDao = new UserDaoImpl();
+    }
 
     public static UserService getInstance() {
         return INSTANCE;
@@ -26,7 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findUserByLoginAndPassword(String login, String password) {
         try {
-            Optional<User> userOption = userDao.getByUserName(login);
+            Optional<User> userOption = userDao.getByLogin(login);
             if (userOption.isPresent()) {
                 User user = userOption.get();
                 String hash = EncryptUtils.getSHA256(password, user.getSalt());

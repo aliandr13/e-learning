@@ -1,4 +1,4 @@
-package by.it.academy.elearning.entity;
+package by.it.academy.elearning.model;
 
 
 import lombok.AllArgsConstructor;
@@ -6,17 +6,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Access;
-import javax.persistence.AccessType;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @MappedSuperclass
-public class Person extends BasicEntity {
+public abstract class Person extends BasicEntity {
 
     @Column(name = "first_name", nullable = false)
     @Access(AccessType.PROPERTY)
@@ -30,4 +27,7 @@ public class Person extends BasicEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 }
