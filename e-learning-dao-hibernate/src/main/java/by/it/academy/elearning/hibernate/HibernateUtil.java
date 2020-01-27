@@ -5,14 +5,16 @@ import org.hibernate.cfg.Configuration;
 
 public class HibernateUtil {
 
-    private static final SessionFactory sessionFactory = buildSessionFactory();
+    private static SessionFactory sessionFactory;
 
-    private static SessionFactory buildSessionFactory() {
-        try {
-            return new Configuration().configure().buildSessionFactory();
-        } catch (Throwable t) {
-            System.err.println("Failed to create sessionFactory object." + t);
-            throw new ExceptionInInitializerError(t);
+    public static synchronized void initSessionFactory() {
+        if (sessionFactory == null) {
+            try {
+                sessionFactory = new Configuration().configure().buildSessionFactory();
+            } catch (Throwable t) {
+                System.err.println("Failed to create sessionFactory object." + t);
+                throw new ExceptionInInitializerError(t);
+            }
         }
     }
 

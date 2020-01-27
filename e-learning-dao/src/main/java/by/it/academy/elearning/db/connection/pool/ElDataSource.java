@@ -22,7 +22,7 @@ public final class ElDataSource {
         config.setUsername(bundle.getString("db.user.name"));
         config.setPassword(bundle.getString("db.user.password"));
         config.setMaximumPoolSize(20);
-        config.setMinimumIdle(5);
+        config.setMinimumIdle(1);
         dataSource = new HikariDataSource(config);
     }
 
