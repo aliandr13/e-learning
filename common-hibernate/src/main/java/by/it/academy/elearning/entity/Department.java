@@ -11,7 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "DEPARTAMENT")
-public class Departament {
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "DEPARTAMENT_ID", unique = true)
@@ -20,7 +20,7 @@ public class Departament {
     private String departamentName;
     @OneToMany(mappedBy = "departament", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<Employee> employees = new HashSet<>();
-    public Departament(String name) {
+    public Department(String name) {
         this.departamentName = name;
     }
 }

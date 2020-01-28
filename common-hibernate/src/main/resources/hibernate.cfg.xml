@@ -11,7 +11,8 @@
         <property name="hibernate.connection.username">root</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="show_sql">true</property>
-        <property name="hbm2ddl.auto">create</property>
+        <property name="format_sql">true</property>
+        <property name="hbm2ddl.auto">update</property>
 <!--        <property name="hibernate.physical_naming_strategy">by.it.academy.elearning.CustomNamingStrategy</property>-->
 
 <!--        <mapping class="by.it.academy.elearning.entity.PersonEntity"/>-->
@@ -19,8 +20,10 @@
 <!--        <mapping class="by.it.academy.elearning.entity.Person"/>-->
         <mapping class="by.it.academy.elearning.entity.Employee"/>
         <mapping class="by.it.academy.elearning.entity.EmployeeDetail"/>
-        <mapping class="by.it.academy.elearning.entity.Departament"/>
+        <mapping class="by.it.academy.elearning.entity.Department"/>
         <mapping class="by.it.academy.elearning.entity.Meeting"/>
+        <mapping class="by.it.academy.elearning.entity.Hero"/>
+        <mapping class="by.it.academy.elearning.entity.Power"/>
 
     </session-factory>
 </hibernate-configuration>
