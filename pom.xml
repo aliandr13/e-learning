@@ -16,7 +16,6 @@
         <module>e-learning-model</module>
         <module>e-learning-dao</module>
         <module>e-learning-service</module>
-        <module>e-learning-dao-sql</module>
         <module>e-learning-dao-hibernate</module>
     </modules>
 
@@ -27,10 +26,24 @@
         <junit.version>4.12</junit.version>
         <slf4j.version>1.7.29</slf4j.version>
         <logback.version>1.2.3</logback.version>
+        <spring.version>5.2.3.RELEASE</spring.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-lang3</artifactId>

@@ -5,7 +5,10 @@ import by.it.academy.elearning.model.Student;
 import by.it.academy.elearning.service.GroupService;
 import by.it.academy.elearning.service.StudentService;
 import by.it.academy.elearning.web.init.ServerConfig;
+import lombok.extern.apachecommons.CommonsLog;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,24 +19,17 @@ import java.io.IOException;
 
 @Slf4j
 @WebServlet(urlPatterns = "/user/student-edit")
+@Component
 public class StudentEditServlet extends HttpServlet {
 
     public static final String GROUPS = "groups";
     public static final String STUDENT = "student";
     public static final String STUDENT_EDIT_JSP = "/WEB-INF/jsp/student/student-edit.jsp";
     public static final String STUDENT_ID = "student_id";
+
+    @Autowired
     private StudentService studentService;
     private GroupService groupService;
-
-    public StudentEditServlet(StudentService studentService, GroupService groupService) {
-        this.studentService = studentService;
-        this.groupService = groupService;
-    }
-
-    public StudentEditServlet() {
-        this.studentService = ServerConfig.getStudentService();
-        this.groupService = ServerConfig.getGroupService();
-    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

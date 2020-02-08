@@ -1,34 +1,25 @@
 package by.it.academy.elearning.service.impl;
 
 import by.it.academy.elearning.dao.UserDao;
-import by.it.academy.elearning.dao.impl.UserDaoImpl;
 import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.security.EncryptUtils;
 import by.it.academy.elearning.service.UserService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
+@Slf4j
+@Service
 public class UserServiceImpl implements UserService {
-
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-
-    private static final UserService INSTANCE = new UserServiceImpl();
 
     private final UserDao userDao;
 
+    @Autowired
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
-    }
-
-    public UserServiceImpl() {
-        this.userDao = new UserDaoImpl();
-    }
-
-    public static UserService getInstance() {
-        return INSTANCE;
     }
 
     @Override
@@ -43,18 +34,13 @@ public class UserServiceImpl implements UserService {
                 }
             }
         } catch (SQLException e) {
-            logger.error("Error find user by login and password " + login, e);
+            log.error("Error find user by login and password " + login, e);
         }
         return Optional.empty();
     }
 
     @Override
     public Optional<User> findUserById(Long id) {
-        try {
-            return userDao.read(id);
-        } catch (SQLException e) {
-            logger.error("Error find user by id: " + id, e);
-        }
-        return Optional.empty();
+        return userDao.read(id);
     }
 }

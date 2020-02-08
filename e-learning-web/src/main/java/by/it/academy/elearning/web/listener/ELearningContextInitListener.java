@@ -10,6 +10,7 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -26,6 +27,10 @@ public class ELearningContextInitListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("Context initialized");
         try {
+            ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
+            context.refresh();
+            context.start();
+
             ResourceBundle bundle = ResourceBundle.getBundle("mysql_hikari");
             ElDataSource.configure(bundle);
             DataSource dataSource = ElDataSource.getDataSource();

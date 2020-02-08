@@ -14,31 +14,11 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public final class ServerConfig {
 
-    private static GroupService groupService;
     private static StudentService studentService;
     private static GroupDao groupDao;
     private static StudentDao studentDao;
 
     private static final Map<Class<?>, Object> LOCKS = new ConcurrentHashMap<>();
-
-
-    public static GroupService getGroupService() {
-        if (groupService == null) {
-            synchronized (LOCKS.computeIfAbsent(GroupService.class, k -> new Object())) {
-                if (groupService == null) groupService = new GroupServiceImpl(getGroupDao());
-            }
-        }
-        return groupService;
-    }
-
-    public static GroupDao getGroupDao() {
-        if (groupDao == null) {
-            synchronized (LOCKS.computeIfAbsent(GroupDao.class, k -> new Object())) {
-                if (groupDao == null) groupDao = new GroupDaoImpl();
-            }
-        }
-        return groupDao;
-    }
 
 
     public static StudentService getStudentService() {

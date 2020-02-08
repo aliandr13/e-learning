@@ -1,27 +1,23 @@
 package by.it.academy.elearning.service.impl;
 
+import by.it.academy.elearning.dao.CourseDao;
 import by.it.academy.elearning.model.Course;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CourseServiceImp {
 
-    private static final CourseServiceImp INSTANCE = new CourseServiceImp();
-    private final List<Course> courses;
+    private final CourseDao courseDao;
 
-    private CourseServiceImp() {
-        courses = new ArrayList<>();
-        courses.add(new Course(1L, "Java"));
-        courses.add(new Course(2L, "Python"));
-        courses.add(new Course(3L, "IOS"));
-    }
-
-    public static CourseServiceImp getService() {
-        return INSTANCE;
+    @Autowired
+    public CourseServiceImp(CourseDao courseDao) {
+        this.courseDao = courseDao;
     }
 
     public List<Course> getAll() {
-        return new ArrayList<>(courses);
+        return courseDao.getAll();
     }
 }

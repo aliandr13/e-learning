@@ -1,19 +1,20 @@
 package by.it.academy.elearning.dao;
 
-import java.sql.SQLException;
+import by.it.academy.elearning.exception.ELearningException;
+
 import java.util.List;
 import java.util.Optional;
 
 public interface DAO<E> {
 
-    Long create(E e) throws SQLException;
+    E create(E e) throws ELearningException;
 
-    Optional<E> read(Long id) throws SQLException;
+    Optional<E> read(Long id) throws ELearningException;
 
-    int update(E e) throws SQLException;
+    void update(E e) throws ELearningException;
 
-    int delete(Long id) throws SQLException;
+    int delete(Long id) throws ELearningException;
 
-    List<E> getAll() throws SQLException;
+    List<E> getAll() throws ELearningException;
 
 }

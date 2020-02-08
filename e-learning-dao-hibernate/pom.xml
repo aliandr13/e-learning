@@ -23,6 +23,11 @@
     </dependency>
 
     <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+    </dependency>
+
+    <dependency>
       <groupId>by.it.academy.elearning</groupId>
       <artifactId>e-learning-model</artifactId>
       <version>${project.parent.version}</version>
