@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -20,6 +21,14 @@ public class UserServiceImpl implements UserService {
     @Autowired
     public UserServiceImpl(UserDao userDao) {
         this.userDao = userDao;
+    }
+
+    @Override
+    public List<User> findAll() {
+        log.info("find all users");
+        List<User> users = userDao.getAll();
+        log.debug("Find all users result: {}", users);
+        return users;
     }
 
     @Override
