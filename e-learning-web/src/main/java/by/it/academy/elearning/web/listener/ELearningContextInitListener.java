@@ -3,14 +3,10 @@ package by.it.academy.elearning.web.listener;
 import by.it.academy.elearning.db.connection.pool.ElDataSource;
 import by.it.academy.elearning.db.migration.DbMigration;
 import by.it.academy.elearning.hibernate.HibernateUtil;
-import by.it.academy.elearning.model.Role;
-import by.it.academy.elearning.model.Student;
-import by.it.academy.elearning.model.User;
+import by.it.academy.elearning.web.config.ServerContext;
 import com.zaxxer.hikari.HikariDataSource;
-import org.hibernate.Session;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -27,10 +23,7 @@ public class ELearningContextInitListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("Context initialized");
         try {
-            ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
-            context.refresh();
-            context.start();
-
+            ServerContext.initContext();
             ResourceBundle bundle = ResourceBundle.getBundle("mysql_hikari");
             ElDataSource.configure(bundle);
             DataSource dataSource = ElDataSource.getDataSource();
@@ -46,5 +39,7 @@ public class ELearningContextInitListener implements ServletContextListener {
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         logger.info("Context destroyed");
+        HibernateUtil.shutdown();
+        ServerContext.closeContext();
     }
 }

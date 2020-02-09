@@ -2,7 +2,7 @@ package by.it.academy.elearning.web.filter;
 
 import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.service.UserService;
-import by.it.academy.elearning.service.impl.UserServiceImpl;
+import by.it.academy.elearning.web.config.ServerContext;
 import by.it.academy.elearning.web.dto.UserAccount;
 import by.it.academy.elearning.web.util.CookieUtils;
 import by.it.academy.elearning.web.util.SessionUtils;
@@ -22,7 +22,15 @@ import java.io.IOException;
 public class CookieFilter extends HttpFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(CookieFilter.class);
-    private static final UserService userService = UserServiceImpl.getInstance();
+    private final UserService userService;
+
+    public CookieFilter(UserService userService) {
+        this.userService = userService;
+    }
+
+    public CookieFilter() {
+        this.userService = ServerContext.getBean(UserService.class);
+    }
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {

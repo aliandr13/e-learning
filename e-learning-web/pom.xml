@@ -13,12 +13,12 @@
     <artifactId>e-learning-web</artifactId>
     <packaging>war</packaging>
 
-    <name>e-learning-web Maven Webapp</name>
+    <name>e-learning-web</name>
 
     <dependencies>
         <dependency>
             <groupId>by.it.academy.elearning</groupId>
-            <artifactId>e-learning-service</artifactId>
+            <artifactId>e-learning-core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
 

@@ -24,7 +24,7 @@
 <form class="form-signin" method="POST" action="${pageContext.request.contextPath}/login">
     <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="text" id="inputEmail" name="userName" class="form-control" placeholder="Email address" required
+    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address" required
            autofocus value="${userName}">
     <label for="inputPassword" class="sr-only">Password</label>
     <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password" required>
@@ -35,9 +35,9 @@
     </div>
     <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
     <p class="mt-5 mb-3 text-muted">
-        Admin user: admin password: a_pass<br>
-        Teacher user: teacher password: t_pass<br>
-        Student user: student password: s_pass</p>
+        Admin user: admin@admin.com password: a_pass<br>
+        Teacher user: teacher@mail.ru password: t_pass<br>
+        Student user: student@rambler.ru password: s_pass</p>
 
     <p class="mt-5 mb-3 text-muted">&copy; 2020</p>
 </form>

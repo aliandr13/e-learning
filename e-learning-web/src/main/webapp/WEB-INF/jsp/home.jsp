@@ -7,7 +7,7 @@
 <html lang="${param.lang}">
 <head>
     <meta charset="UTF-8">
-    <title><fmt:message key="home.page.title"/></title>
+    <title>Home</title>
 </head>
 <body>
 
