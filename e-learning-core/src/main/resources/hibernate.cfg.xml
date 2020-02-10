@@ -18,6 +18,8 @@
         <mapping class="by.it.academy.elearning.model.Role"/>
         <mapping class="by.it.academy.elearning.model.User"/>
         <mapping class="by.it.academy.elearning.model.UserAuth"/>
+        <mapping class="by.it.academy.elearning.model.Course"/>
+        <mapping class="by.it.academy.elearning.model.Group"/>
 
     </session-factory>
 </hibernate-configuration>

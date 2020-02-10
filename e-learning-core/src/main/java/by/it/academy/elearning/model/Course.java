@@ -14,8 +14,8 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     private Integer id;
+
     @Column(name = "name", nullable = false, unique = true)
     private String name;
-
 
 }

@@ -3,6 +3,8 @@ package by.it.academy.elearning.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -35,5 +37,10 @@ public class User {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private UserAuth userAuth;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "users")
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private List<Group> groups = new ArrayList<>(2);
 
 }
