@@ -1,7 +1,7 @@
 package by.it.academy.elearning.service.impl;
 
 import by.it.academy.elearning.dao.UserDao;
-import by.it.academy.elearning.model.UserAuth;
+import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.security.EncryptUtils;
 import by.it.academy.elearning.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,21 +24,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserAuth> findAll() {
+    public List<User> findAll() {
         log.info("find all users");
-        List<UserAuth> users = userDao.getAll();
+        List<User> users = userDao.getAll();
         log.debug("Find all users result: {}", users);
         return users;
     }
 
     @Override
-    public Optional<UserAuth> findUserByLoginAndPassword(String login, String password) {
+    public Optional<User> findUserByLoginAndPassword(String login, String password) {
         try {
-            Optional<UserAuth> userOption = userDao.getByLogin(login);
+            Optional<User> userOption = userDao.getUserAuthByLogin(login);
             if (userOption.isPresent()) {
-                UserAuth user = userOption.get();
-                String hash = EncryptUtils.getSHA256(password, user.getSalt());
-                if (user.getPassword().equals(hash)) {
+                User user = userOption.get();
+                String hash = EncryptUtils.getSHA256(password, user.getUserAuth().getSalt());
+                if (user.getUserAuth().getPassword().equals(hash)) {
                     return Optional.of(user);
                 }
             }
@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<UserAuth> findUserById(Long id) {
+    public Optional<User> findUserById(Long id) {
         return userDao.read(id);
     }
 }

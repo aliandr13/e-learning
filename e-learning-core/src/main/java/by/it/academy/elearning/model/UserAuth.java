@@ -17,12 +17,15 @@ public class UserAuth {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Exclude
     private Long id;
+    @Column(name = "login", nullable = false, unique = true)
+    private String login;
     @Column(name = "password", nullable = false)
     private String password;
     @Column(name = "salt", nullable = false)
     private String salt;
 
-    @OneToOne(mappedBy = "userAuth", fetch = FetchType.LAZY)
-    private User userInfo;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

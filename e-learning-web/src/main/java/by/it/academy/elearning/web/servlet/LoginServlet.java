@@ -1,6 +1,6 @@
 package by.it.academy.elearning.web.servlet;
 
-import by.it.academy.elearning.model.UserAuth;
+import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.service.UserService;
 import by.it.academy.elearning.web.config.ServerContext;
 import by.it.academy.elearning.web.dto.UserAccount;
@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
             hasError = true;
             errorMsg = "UserName and password should not be empty; ";
         } else {
-            Optional<UserAuth> user = userService.findUserByLoginAndPassword(email, password);
+            Optional<User> user = userService.findUserByLoginAndPassword(email, password);
             if (user.isEmpty()) {
                 hasError = true;
                 errorMsg = "Invalid user name or password";

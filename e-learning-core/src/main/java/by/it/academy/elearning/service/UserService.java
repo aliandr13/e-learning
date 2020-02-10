@@ -1,5 +1,6 @@
 package by.it.academy.elearning.service;
 
+import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.model.UserAuth;
 
 import java.util.List;
@@ -7,9 +8,9 @@ import java.util.Optional;
 
 public interface UserService {
 
-    List<UserAuth> findAll();
+    List<User> findAll();
 
-    Optional<UserAuth> findUserByLoginAndPassword(String login, String password);
+    Optional<User> findUserByLoginAndPassword(String login, String password);
 
-    Optional<UserAuth> findUserById(Long userId);
+    Optional<User> findUserById(Long userId);
 }
