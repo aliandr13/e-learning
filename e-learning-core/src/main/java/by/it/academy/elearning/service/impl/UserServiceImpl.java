@@ -1,6 +1,9 @@
 package by.it.academy.elearning.service.impl;
 
+import by.it.academy.elearning.dao.RoleDao;
 import by.it.academy.elearning.dao.UserDao;
+import by.it.academy.elearning.model.Role;
+import by.it.academy.elearning.model.RoleEnum;
 import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.security.EncryptUtils;
 import by.it.academy.elearning.service.UserService;
@@ -18,9 +21,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
 
+    private final RoleDao roleDao;
+
     @Autowired
-    public UserServiceImpl(UserDao userDao) {
+    public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
         this.userDao = userDao;
+        this.roleDao = roleDao;
     }
 
     @Override
@@ -51,5 +57,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> findUserById(Long id) {
         return userDao.read(id);
+    }
+
+    @Override
+    public void createUser(User user) {
+        Role studentRole = roleDao.getByName(RoleEnum.STUDENT);
+        user.setRole(studentRole);
+        userDao.create(user);
     }
 }

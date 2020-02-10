@@ -8,8 +8,8 @@ create table user
 (
     id          bigint auto_increment primary key,
     email       varchar(255) not null unique,
-    first_name  varchar(255) not null,
-    last_name   varchar(255) not null,
+    name        varchar(255) not null,
+    surname     varchar(255) not null,
     middle_name varchar(255) null,
     phone       varchar(50)  null,
     role_id     int          not null,
@@ -35,11 +35,11 @@ values ('ADMIN'),
        ('TEACHER'),
        ('STUDENT');
 
-INSERT INTO user (first_name, middle_name, last_name, phone, email, role_id)
+INSERT INTO user (name, middle_name, surname, phone, email, role_id)
 VALUES ('tom', 'tommy', 'tom_last', '3752911122233', 'admin@admin.com', 1);
-INSERT INTO user (first_name, middle_name, last_name, phone, email, role_id)
+INSERT INTO user (name, middle_name, surname, phone, email, role_id)
 VALUES ('tom', 'tommy', 'tom_last', '3752911122233', 'teacher@mail.ru', 2);
-INSERT INTO user (first_name, middle_name, last_name, phone, email, role_id)
+INSERT INTO user (name, middle_name, surname, phone, email, role_id)
 VALUES ('jerry', 'jerry', 'jerry_last', '+375-29-444-55-66', 'student@rambler.ru', 3);
 
 INSERT INTO user_auth (login, password, salt, user_id)

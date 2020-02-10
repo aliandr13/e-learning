@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(urlPatterns = "/user/user-list")
+@WebServlet(urlPatterns = "/admin/user-list")
 @Slf4j
 public class UserListServlet extends HttpServlet {
 

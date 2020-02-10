@@ -18,12 +18,12 @@ public class User {
     private Long id;
     @Column(name = "email", unique = true, nullable = false)
     private String email;
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
+    @Column(name = "name", nullable = false)
+    private String name;
     @Column(name = "middle_name")
     private String middleName;
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "surname", nullable = false)
+    private String surname;
     @Column(name = "phone", length = 50)
     private String phone;
 

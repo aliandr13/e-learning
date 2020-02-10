@@ -1,9 +1,9 @@
-<%@include file="../include/header.jsp" %>
-<form method="post" action="${pageContext.request.contextPath}/user/student-add">
+ <%@include file="../include/header.jsp" %>
+<form method="post" action="${pageContext.request.contextPath}/admin/user-add">
     <table>
         <tr>
             <td><label>First Name</label></td>
-            <td><input type="text" name="firstName"/></td>
+            <td><input type="text" name="name"/></td>
         </tr>
         <tr>
             <td><label>Middle Name</label></td>
@@ -11,7 +11,7 @@
         </tr>
         <tr>
             <td><label>Last Name</label></td>
-            <td><input type="text" name="lastName"/></td>
+            <td><input type="text" name="surname"/></td>
         </tr>
         <tr>
             <td><label>Phone</label></td>

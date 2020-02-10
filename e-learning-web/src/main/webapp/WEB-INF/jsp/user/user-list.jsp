@@ -10,8 +10,8 @@
 <table class="table table-striped">
     <thead>
     <th>#</th>
-    <th>Last Name</th>
-    <th>First Name</th>
+    <th>Name</th>
+    <th>Surname</th>
     <th>Phone</th>
     <th>email</th>
     <th>Action</th>
@@ -22,17 +22,17 @@
     <c:forEach var="user" items="${users}">
         <tr>
             <th scope="row">${user.id}</th>
-            <th>${user.userInfo.lastName}</th>
-            <th>${user.userInfo.firstName}</th>
-            <th>${user.userInfo.phone}</th>
+            <th>${user.name}</th>
+            <th>${user.surname}</th>
+            <th>${user.phone}</th>
             <th>${user.email}</th>
 
             <th>
-                <a:auth path="/user/user-delete">
-                    <c:url value="/user/user-delete" var="delete_link" scope="page">
+                <a:auth path="/admin/user-delete">
+                    <c:url value="/admin/user-delete" var="delete_link" scope="page">
                         <c:param name="id" value="${user.id}"/>
                     </c:url>
-                    <c:url value="/user/user-edit" var="edit_link" scope="page">
+                    <c:url value="/admin/user-edit" var="edit_link" scope="page">
                         <c:param name="id" value="${user.id}"/>
                     </c:url>
                     <a href="${edit_link}">Edit</a> |
@@ -44,7 +44,7 @@
     </tbody>
 </table>
 <p>
-    <c:url value="/user/user-add" var="add" scope="page"/>
+    <c:url value="/admin/user-add" var="add" scope="page"/>
     <a href="${add}">Add new user</a>
 </p>
 

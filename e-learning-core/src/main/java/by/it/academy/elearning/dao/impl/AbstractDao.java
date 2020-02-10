@@ -142,7 +142,4 @@ abstract class AbstractDao<E> implements DAO<E> {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println("===== name : " + AbstractDao.class.getSimpleName());
-    }
 }

@@ -23,7 +23,7 @@ public class App {
         UserAuth auth = UserAuth.builder().password("pass").salt("sss").build();
         session.save(auth);
 
-        User user = User.builder().role(role).email("email").firstName("sdf").lastName("sdf").userAuth(auth).build();
+        User user = User.builder().role(role).email("email").name("sdf").surname("sdf").userAuth(auth).build();
 
         session.save(user);
 
