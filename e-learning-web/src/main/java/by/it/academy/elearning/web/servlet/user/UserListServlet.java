@@ -1,6 +1,6 @@
 package by.it.academy.elearning.web.servlet.user;
 
-import by.it.academy.elearning.model.User;
+import by.it.academy.elearning.model.UserAuth;
 import by.it.academy.elearning.service.UserService;
 import by.it.academy.elearning.web.config.ServerContext;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +29,7 @@ public class UserListServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<User> userList = userService.findAll();
+        List<UserAuth> userList = userService.findAll();
         req.setAttribute("users", userList);
         req.getRequestDispatcher("/WEB-INF/jsp/user/user-list.jsp").forward(req, resp);
     }

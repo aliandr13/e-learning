@@ -29,6 +29,6 @@ public class UserInfo {
     @JoinColumn(name = "user_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
-    private User user;
+    private UserAuth user;
 
 }

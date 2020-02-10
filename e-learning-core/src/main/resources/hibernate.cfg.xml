@@ -17,7 +17,7 @@
 
         <mapping class="by.it.academy.elearning.model.Role"/>
         <mapping class="by.it.academy.elearning.model.UserInfo"/>
-        <mapping class="by.it.academy.elearning.model.User"/>
+        <mapping class="by.it.academy.elearning.model.UserAuth"/>
 
     </session-factory>
 </hibernate-configuration>

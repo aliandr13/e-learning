@@ -1,6 +1,5 @@
 package by.it.academy.elearning.web.tags.custom;
 
-import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.web.dto.UserAccount;
 import by.it.academy.elearning.web.util.SessionUtils;
 

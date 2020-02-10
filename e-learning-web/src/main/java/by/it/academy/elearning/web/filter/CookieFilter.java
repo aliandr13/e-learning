@@ -1,6 +1,6 @@
 package by.it.academy.elearning.web.filter;
 
-import by.it.academy.elearning.model.User;
+import by.it.academy.elearning.model.UserAuth;
 import by.it.academy.elearning.service.UserService;
 import by.it.academy.elearning.web.config.ServerContext;
 import by.it.academy.elearning.web.dto.UserAccount;
@@ -43,7 +43,7 @@ public class CookieFilter extends HttpFilter {
         super.doFilter(req, res, chain);
     }
 
-    private void addUserToSession(HttpServletRequest req, User u) {
+    private void addUserToSession(HttpServletRequest req, UserAuth u) {
         UserAccount user = new UserAccount(u);
         SessionUtils.setUserSession(req, user);
         logger.info("User restored from cookie; {}", user);

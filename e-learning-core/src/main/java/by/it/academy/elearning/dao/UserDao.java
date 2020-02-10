@@ -1,12 +1,12 @@
 package by.it.academy.elearning.dao;
 
-import by.it.academy.elearning.model.User;
+import by.it.academy.elearning.model.UserAuth;
 
 import java.sql.SQLException;
 import java.util.Optional;
 
-public interface UserDao extends DAO<User> {
+public interface UserDao extends DAO<UserAuth> {
 
-    Optional<User> getByLogin(String email) throws SQLException;
+    Optional<UserAuth> getByLogin(String email) throws SQLException;
 
 }

@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "user")
 @NoArgsConstructor
 @Data
-public class User {
+public class UserAuth {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
