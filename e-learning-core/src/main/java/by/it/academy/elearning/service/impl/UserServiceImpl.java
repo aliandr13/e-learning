@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> findAll() {
         log.info("find all users");
-        List<User> users = userDao.getAll();
+        List<User> users = userDao.findAll();
         log.debug("Find all users result: {}", users);
         return users;
     }
@@ -55,14 +55,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> findUserById(Long id) {
-        return userDao.read(id);
+    public User create(User user) {
+        Role studentRole = roleDao.getByName(RoleEnum.STUDENT);
+        user.setRole(studentRole);
+        return userDao.create(user);
     }
 
     @Override
-    public void createUser(User user) {
-        Role studentRole = roleDao.getByName(RoleEnum.STUDENT);
-        user.setRole(studentRole);
-        userDao.create(user);
+    public Optional<User> findById(Number id) {
+        return userDao.find((Long) id);
     }
+
+    @Override
+    public void delete(User user) {
+        userDao.delete(user.getId());
+    }
+
 }

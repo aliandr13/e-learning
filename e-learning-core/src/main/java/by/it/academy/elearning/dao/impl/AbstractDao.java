@@ -53,7 +53,7 @@ abstract class AbstractDao<E> implements DAO<E> {
     }
 
     @Override
-    public Optional<E> read(Long id) {
+    public Optional<E> find(Long id) {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -108,7 +108,7 @@ abstract class AbstractDao<E> implements DAO<E> {
     }
 
     @Override
-    public List<E> getAll() {
+    public List<E> findAll() {
         Session session = null;
         Transaction transaction = null;
         try {

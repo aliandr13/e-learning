@@ -36,9 +36,8 @@ public class CookieFilter extends HttpFilter {
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
         if (SessionUtils.getUserAccount(req).isEmpty()) {
             CookieUtils.getAuthUserId(req)
-                    .flatMap(userService::findUserById)
+                    .flatMap(userService::findById)
                     .ifPresent(u -> addUserToSession(req, u));
-
         }
         super.doFilter(req, res, chain);
     }

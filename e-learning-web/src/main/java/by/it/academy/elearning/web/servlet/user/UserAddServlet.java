@@ -39,7 +39,7 @@ public class UserAddServlet extends HttpServlet {
                 .phone(req.getParameter("phone"))
                 .build();
 
-        userService.createUser(user);
+        userService.create(user);
 
         resp.sendRedirect(req.getContextPath() + "/admin/user-list");
     }
