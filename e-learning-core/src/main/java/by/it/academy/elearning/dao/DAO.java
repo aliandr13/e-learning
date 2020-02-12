@@ -9,7 +9,7 @@ public interface DAO<E> {
 
     E create(E e) throws ELearningException;
 
-    Optional<E> find(Long id) throws ELearningException;
+    Optional<E> find(Number id) throws ELearningException;
 
     void update(E e) throws ELearningException;
 

@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findById(Number id) {
-        return userDao.find((Long) id);
+        return userDao.find(id);
     }
 
     @Override

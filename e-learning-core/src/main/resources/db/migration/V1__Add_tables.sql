@@ -13,6 +13,8 @@ create table user
     middle_name varchar(255) null,
     phone       varchar(50)  null,
     role_id     int          not null,
+    created     datetime(6)  null,
+    updated     datetime(6)  null,
     constraint FK_user_role
         foreign key (role_id) references user_role (id)
 ) engine = InnoDB;
@@ -38,12 +40,15 @@ create table group_t
 (
     id          bigint auto_increment primary key,
     name        varchar(255) not null unique,
-    status      varchar(50)  not null,
+    status      varchar(50)  not null default 'PLANED',
     start_date  date         null,
     finish_date date         null,
     course_id   int          not null,
+    created     datetime(6)  null,
+    updated     datetime(6)  null,
     constraint FK_group_t_course
-        foreign key (course_id) references course (id)
+        foreign key (course_id) references course (id),
+    constraint chk_status check ( status in ('ACTIVE', 'FINISHED', 'PLANED'))
 ) engine = InnoDB;
 
 create table user_group_link

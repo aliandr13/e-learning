@@ -1,10 +1,14 @@
 package by.it.academy.elearning.model;
 
 import lombok.*;
-import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@DynamicInsert
+@DynamicUpdate
 public class Group {
 
     @Id
@@ -33,7 +39,7 @@ public class Group {
     @Enumerated(EnumType.STRING)
     private GroupStatus status = GroupStatus.PLANED;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
     @JoinColumn(name = "course_id")
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
@@ -46,4 +52,11 @@ public class Group {
     @EqualsAndHashCode.Exclude
     @ToString.Exclude
     private List<User> users = new ArrayList<>();
+
+    @CreationTimestamp
+    @EqualsAndHashCode.Exclude
+    private LocalDateTime created;
+    @UpdateTimestamp
+    @EqualsAndHashCode.Exclude
+    private LocalDateTime updated;
 }

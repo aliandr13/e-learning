@@ -28,7 +28,7 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Optional<Course> findById(Number id) {
-        return courseDao.find((Long) id);
+        return courseDao.find(id);
     }
 
     @Override

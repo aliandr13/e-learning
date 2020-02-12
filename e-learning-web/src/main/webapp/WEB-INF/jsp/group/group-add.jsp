@@ -1,5 +1,5 @@
 <%@include file="../include/header.jsp" %>
-<form method="post" action="${pageContext.request.contextPath}/user/group-add">
+<form method="post" action="${pageContext.request.contextPath}/admin/group-add">
     <table>
         <tr>
             <td><label>First Name</label></td>
@@ -8,6 +8,10 @@
         <tr>
             <td><label>Start Date</label></td>
             <td><input type="date" name="startDate"/></td>
+        </tr>
+        <tr>
+            <td><label>Finish Date</label></td>
+            <td><input type="date" name="finishDate"/></td>
         </tr>
         <tr>
             <td><label for="course">Course</label></td>

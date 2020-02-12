@@ -1,8 +1,11 @@
 package by.it.academy.elearning.model;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,4 +46,10 @@ public class User {
     @EqualsAndHashCode.Exclude
     private List<Group> groups = new ArrayList<>(2);
 
+    @CreationTimestamp
+    @EqualsAndHashCode.Exclude
+    private LocalDateTime created;
+    @UpdateTimestamp
+    @EqualsAndHashCode.Exclude
+    private LocalDateTime updated;
 }

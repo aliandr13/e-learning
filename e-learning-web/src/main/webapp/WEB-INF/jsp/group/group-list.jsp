@@ -1,4 +1,3 @@
-<%@ page import="static by.it.academy.elearning.web.servlet.student.StudentListServlet.GROUP_ID_PARAM" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -8,12 +7,14 @@
 <%@include file="../include/menu.jsp" %>
 
 
-<table class="table table-striped" border="1">
+<table class="table table-striped">
     <thead>
     <th>#</th>
     <th>Group Name</th>
     <th>Course Name</th>
     <th>Start date</th>
+    <th>Finish date</th>
+    <th>Status</th>
     <th>Students</th>
     <th>Delete</th>
 
@@ -26,9 +27,11 @@
             <th>${group.name}</th>
             <th>${group.course.name}</th>
             <th>${group.startDate}</th>
+            <th>${group.finishDate}</th>
+            <th>${group.status}</th>
             <th>
                 <c:url value="/user/student-list" var="students_link" scope="page">
-                    <c:param name="<%= GROUP_ID_PARAM %>" value="${group.id}"/>
+                    <c:param name="id" value="${group.id}"/>
                 </c:url>
                 <a href="${students_link}">View Students</a>
             </th>
@@ -45,7 +48,7 @@
     </tbody>
 </table>
 <p>
-    <c:url value="/user/group-add" var="add" scope="page"/>
+    <c:url value="/admin/group-add" var="add" scope="page"/>
     <a href="${add}">Add new Group</a>
 </p>
 
