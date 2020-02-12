@@ -30,8 +30,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
-        String rememberMeStr = req.getParameter("rememberMe");
-        boolean remember = "Y".equals(rememberMeStr);
+        boolean remember = "Y".equals(req.getParameter("rememberMe"));
 
         String errorMsg = "";
         boolean hasError = false;
@@ -40,7 +39,7 @@ public class LoginServlet extends HttpServlet {
             hasError = true;
             errorMsg = "UserName and password should not be empty; ";
         } else {
-            Optional<User> user = userService.findUser(userName, password);
+            Optional<User> user = userService.findUserByLoginAndPassword(userName, password);
             if (user.isEmpty()) {
                 hasError = true;
                 errorMsg = "Invalid user name or password";
