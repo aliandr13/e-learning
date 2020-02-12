@@ -1,7 +1,8 @@
 package by.it.academy.elearning.web.filter;
 
+import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.service.UserService;
-import by.it.academy.elearning.service.UserServiceImpl;
+import by.it.academy.elearning.service.impl.UserServiceImpl;
 import by.it.academy.elearning.web.dto.UserAccount;
 import by.it.academy.elearning.web.util.CookieUtils;
 import by.it.academy.elearning.web.util.SessionUtils;
@@ -25,13 +26,18 @@ public class CookieFilter extends HttpFilter {
 
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        logger.debug("Cookie filter");
-
         if (SessionUtils.getUserAccount(req).isEmpty()) {
             CookieUtils.getAuthUserId(req)
                     .flatMap(userService::findUserById)
-                    .ifPresent(u -> SessionUtils.setUserSession(req, new UserAccount(u)));
+                    .ifPresent(u -> addUserToSession(req, u));
+
         }
         super.doFilter(req, res, chain);
+    }
+
+    private void addUserToSession(HttpServletRequest req, User u) {
+        UserAccount user = new UserAccount(u);
+        SessionUtils.setUserSession(req, user);
+        logger.info("User restored from cookie; {}", user);
     }
 }

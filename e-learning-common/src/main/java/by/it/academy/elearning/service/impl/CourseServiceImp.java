@@ -1,4 +1,4 @@
-package by.it.academy.elearning.service;
+package by.it.academy.elearning.service.impl;
 
 import by.it.academy.elearning.model.Course;
 

@@ -1,6 +1,7 @@
-package by.it.academy.elearning.service;
+package by.it.academy.elearning.service.impl;
 
 import by.it.academy.elearning.model.User;
+import by.it.academy.elearning.service.UserService;
 
 import java.util.Map;
 import java.util.Optional;
