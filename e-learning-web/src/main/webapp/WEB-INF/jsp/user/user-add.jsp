@@ -1,4 +1,4 @@
- <%@include file="../include/header.jsp" %>
+<%@include file="../include/header.jsp" %>
 <form method="post" action="${pageContext.request.contextPath}/admin/user-add">
     <table>
         <tr>
@@ -22,10 +22,11 @@
             <td><input type="text" name="email"/></td>
         </tr>
         <tr>
-            <td><label for="course">Course</label></td>
+            <td><label for="group">Group</label></td>
             <td>
-                <select id="course" name="courseId">
+                <select id="group" name="groupId">
                     <option value="-1"></option>
+                    <jsp:useBean id="groups" scope="request" type="java.util.List"/>
                     <c:forEach var="group" items="${groups}">
                         <option value="${group.id}">${group.name}
                         </option>

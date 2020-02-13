@@ -41,7 +41,7 @@ public class User {
     @ToString.Exclude
     private UserAuth userAuth;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "users")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Group> groups = new ArrayList<>(2);

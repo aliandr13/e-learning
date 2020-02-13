@@ -21,7 +21,7 @@ abstract class AbstractDao<E> implements DAO<E> {
     public static final String DELETE_BY_ID_TEMPLATE = "DELETE %s where id = : id";
     private final String GET_ALL;
     private final String DELETE_BY_ID;
-    protected final Logger logger;
+    private final Logger logger;
     protected final Class<E> entityClass;
 
     protected AbstractDao(Logger logger, @NonNull Class<E> entityClass) {

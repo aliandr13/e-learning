@@ -1,12 +1,10 @@
 package by.it.academy.elearning;
 
 import by.it.academy.elearning.hibernate.HibernateUtil;
-import by.it.academy.elearning.model.*;
+import by.it.academy.elearning.model.Group;
+import by.it.academy.elearning.model.User;
 import org.hibernate.Session;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
+import org.hibernate.Transaction;
 
 public class App {
 
@@ -14,40 +12,19 @@ public class App {
     public static void main(String[] args) {
         HibernateUtil.initSessionFactory();
         Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
 
-        Role role = new Role();
-        role.setRole(RoleEnum.ADMIN);
+        User user = session.find(User.class, 4L);
 
-        session.saveOrUpdate(role);
+        Group group = session.find(Group.class, 1L);
 
-
-        UserAuth auth = UserAuth.builder().login("dssd").password("pass").salt("sss").build();
-        session.save(auth);
-
-        User user = User.builder().role(role).email("email").name("sdf").surname("sdf").userAuth(auth).
-                groups(new ArrayList<>())
-                .build();
-
-        session.save(user);
-
-        Course course = new Course();
-        course.setName("JAVA EE");
-
-        session.save(course);
-
-
-        Group group = new Group();
-
-        group.setName("JD2");
-        group.setCourse(course);
-        group.setStartDate(LocalDate.of(2020, 1, 1));
-        group.setStatus(GroupStatus.ACTIVE);
         group.getUsers().add(user);
+        user.getGroups().add(group);
 
-        session.save(group);
+        session.saveOrUpdate(user);
 
-        user.setGroups(Collections.singletonList(group));
-        session.update(user);
+        transaction.commit();
+
 
         session.close();
         HibernateUtil.shutdown();

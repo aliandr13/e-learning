@@ -3,10 +3,10 @@ package by.it.academy.elearning.model;
 import lombok.*;
 import org.hibernate.annotations.*;
 
-import javax.persistence.*;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -46,7 +46,8 @@ public class Group {
     private Course course;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_group_link", joinColumns = {@JoinColumn(name = "group_id")},
+    @JoinTable(name = "user_group_link",
+            joinColumns = {@JoinColumn(name = "group_id")},
             inverseJoinColumns = {@JoinColumn(name = "user_id")})
     @BatchSize(size = 30)
     @EqualsAndHashCode.Exclude
