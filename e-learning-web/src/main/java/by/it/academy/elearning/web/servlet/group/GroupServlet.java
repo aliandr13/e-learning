@@ -34,7 +34,8 @@ public class GroupServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         long groupId = Long.parseLong(req.getParameter("id"));
-        Group group = groupService.findById(groupId).orElseThrow(() -> new ELearningException("Group not found by id " + groupId));
+        Group group = groupService.findById(groupId)
+                .orElseThrow(() -> new ELearningException("Group not found by id " + groupId));
         List<User> users = userService.findStudentsByGroup(groupId);
         req.setAttribute("group", group);
         req.setAttribute("users", users);

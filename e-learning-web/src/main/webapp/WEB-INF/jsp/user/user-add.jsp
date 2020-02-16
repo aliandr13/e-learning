@@ -25,10 +25,9 @@
             <td><label for="group">Group</label></td>
             <td>
                 <select id="group" name="groupId">
-                    <option value="-1"></option>
                     <jsp:useBean id="groups" scope="request" type="java.util.List"/>
                     <c:forEach var="group" items="${groups}">
-                        <option value="${group.id}">${group.name}
+                        <option <c:if test="${selectedGroup == group.id}">selected='selected'</c:if> value="${group.id}">${group.name}
                         </option>
                     </c:forEach>
                 </select>

@@ -9,6 +9,7 @@ import by.it.academy.elearning.model.Role;
 import by.it.academy.elearning.model.RoleEnum;
 import by.it.academy.elearning.model.User;
 import by.it.academy.elearning.security.EncryptUtils;
+import by.it.academy.elearning.service.GroupService;
 import by.it.academy.elearning.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,13 +28,13 @@ public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
     private final RoleDao roleDao;
-    private final GroupDao groupDao;
+    private final GroupService groupService;
 
     @Autowired
-    public UserServiceImpl(UserDao userDao, RoleDao roleDao, GroupDao groupDao) {
+    public UserServiceImpl(UserDao userDao, RoleDao roleDao, GroupService groupService) {
         this.userDao = userDao;
         this.roleDao = roleDao;
-        this.groupDao = groupDao;
+        this.groupService = groupService;
     }
 
     @Override
@@ -68,6 +70,25 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User create(User user, Long groupId) {
+        Role studentRole = roleDao.getByName(RoleEnum.STUDENT);
+        user.setRole(studentRole);
+
+        Optional<Group> byId = groupService.findById(groupId);
+        if (byId.isPresent()) {
+            List<Group> groups = user.getGroups();
+            if (groups == null) {
+                Group group = byId.get();
+                user.setGroups(Collections.singletonList(group));
+            } else {
+                groups.add(byId.get());
+            }
+        }
+
+        return userDao.create(user);
+    }
+
+    @Override
     public Optional<User> findById(Number id) {
         return userDao.find(id);
     }
@@ -85,20 +106,4 @@ public class UserServiceImpl implements UserService {
         return students;
     }
 
-    @Override
-    public void assignToGroup(User u, long groupId) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
-
-        User user = session.find(User.class, u.getId());
-
-        Group group = session.find(Group.class, groupId);
-
-        group.getUsers().add(user);
-        user.getGroups().add(group);
-        session.saveOrUpdate(user);
-        transaction.commit();
-        session.close();
-
-    }
 }

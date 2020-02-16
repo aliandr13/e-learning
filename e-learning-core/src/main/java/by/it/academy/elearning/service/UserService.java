@@ -9,7 +9,8 @@ public interface UserService extends BasicService<User> {
 
     Optional<User> findUserByLoginAndPassword(String login, String password);
 
+    User create(User user, Long groupId);
+
     List<User> findStudentsByGroup(long groupId);
 
-    void assignToGroup(User user, long groupId);
 }

@@ -3,6 +3,7 @@ package by.it.academy.elearning.dao.impl;
 import by.it.academy.elearning.dao.UserDao;
 import by.it.academy.elearning.exception.ELearningException;
 import by.it.academy.elearning.hibernate.HibernateUtil;
+import by.it.academy.elearning.model.Group;
 import by.it.academy.elearning.model.RoleEnum;
 import by.it.academy.elearning.model.User;
 import lombok.extern.slf4j.Slf4j;
@@ -59,6 +60,31 @@ public class UserDaoImpl extends AbstractDao<User> implements UserDao {
         } catch (HibernateException hb) {
             log.error("Error while find by id {} and role {}", groupId, roleName);
             throw new ELearningException("Error while find by id and role", hb);
+        } finally {
+            closeQuietly(session);
+        }
+    }
+
+
+    public User create(User user) {
+        Session session = null;
+        Transaction transaction = null;
+        try {
+            session = HibernateUtil.getSessionFactory().openSession();
+            transaction = session.beginTransaction();
+            List<Group> groups = user.getGroups();
+            if (groups != null && !groups.isEmpty()) {
+                for (Group group : groups) {
+                    session.refresh(group);
+                    group.getUsers().add(user);
+                }
+            }
+            session.saveOrUpdate(user);
+            transaction.commit();
+            return user;
+        } catch (HibernateException he) {
+            rollback(transaction);
+            throw new ELearningException("Error creating entity", he);
         } finally {
             closeQuietly(session);
         }

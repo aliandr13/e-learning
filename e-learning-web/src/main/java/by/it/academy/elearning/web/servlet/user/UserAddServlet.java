@@ -13,9 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @WebServlet(urlPatterns = "/admin/user-add")
 public class UserAddServlet extends HttpServlet {
@@ -35,8 +33,10 @@ public class UserAddServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<Group> courses = groupService.findAll();
-        req.setAttribute("groups", courses);
+        List<Group> groups = groupService.findAll();
+        Long groupId = Long.parseLong(req.getParameter("groupId"));
+        req.setAttribute("selectedGroup", groupId);
+        req.setAttribute("groups", groups);
         req.getRequestDispatcher("/WEB-INF/jsp/user/user-add.jsp").forward(req, resp);
     }
 
@@ -54,24 +54,14 @@ public class UserAddServlet extends HttpServlet {
         String groupIdStr = req.getParameter("groupId");
         if (StringUtils.isNotEmpty(groupIdStr)) {
             long groupId = Long.parseLong(groupIdStr);
-            Optional<Group> byId = groupService.findById(groupId);
-            if (byId.isPresent()) {
-                List<Group> groups = user.getGroups();
-                if (groups == null) {
-                    Group group = byId.get();
-                    group.getUsers().add(user);
-                    user.setGroups(Collections.singletonList(group));
-                } else {
-                    groups.add(byId.get());
-                }
-            }
+            userService.create(user, groupId);
         }
         userService.create(user);
 
-        if (StringUtils.isNotEmpty(groupIdStr)) {
-            resp.sendRedirect(req.getContextPath() + "/teacher/group?id=" + groupIdStr);
-        } else {
+        if (StringUtils.isEmpty(groupIdStr) || "-1".equals(groupIdStr)) {
             resp.sendRedirect(req.getContextPath() + "/admin/user-list");
+        } else {
+            resp.sendRedirect(req.getContextPath() + "/teacher/group?id=" + groupIdStr);
         }
     }
 }
