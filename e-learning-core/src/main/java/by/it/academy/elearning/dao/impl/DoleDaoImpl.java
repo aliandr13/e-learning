@@ -14,7 +14,7 @@ import org.springframework.stereotype.Repository;
 
 @Slf4j
 @Repository
-public class DoleDaoImpl extends AbstractDao<Role> implements RoleDao {
+public class DoleDaoImpl extends AbstractDao<Role> implements RoleDao { // RoleDaoImpl
 
     protected DoleDaoImpl() {
         super(log, Role.class);
