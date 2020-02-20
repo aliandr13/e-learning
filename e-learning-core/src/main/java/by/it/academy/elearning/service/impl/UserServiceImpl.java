@@ -1,9 +1,7 @@
 package by.it.academy.elearning.service.impl;
 
-import by.it.academy.elearning.dao.GroupDao;
 import by.it.academy.elearning.dao.RoleDao;
 import by.it.academy.elearning.dao.UserDao;
-import by.it.academy.elearning.hibernate.HibernateUtil;
 import by.it.academy.elearning.model.Group;
 import by.it.academy.elearning.model.Role;
 import by.it.academy.elearning.model.RoleEnum;
@@ -12,10 +10,9 @@ import by.it.academy.elearning.security.EncryptUtils;
 import by.it.academy.elearning.service.GroupService;
 import by.it.academy.elearning.service.UserService;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.util.Collections;
@@ -24,6 +21,7 @@ import java.util.Optional;
 
 @Slf4j
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;

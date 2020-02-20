@@ -3,16 +3,17 @@ package by.it.academy.elearning.service.impl;
 import by.it.academy.elearning.dao.GroupDao;
 import by.it.academy.elearning.model.Group;
 import by.it.academy.elearning.service.GroupService;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Slf4j
 @Service
+@Transactional
 public class GroupServiceImpl implements GroupService {
 
     private final GroupDao groupDao;
@@ -41,8 +42,7 @@ public class GroupServiceImpl implements GroupService {
     @Override
     public void delete(Group group) {
         log.info("delete group {}", group);
-        int delete = groupDao.delete(group.getId());
-        log.debug("delete result {}", delete);
+        groupDao.delete(group.getId());
     }
 
     @Override
