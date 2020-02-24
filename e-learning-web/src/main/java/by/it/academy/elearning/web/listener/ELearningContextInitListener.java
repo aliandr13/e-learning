@@ -22,24 +22,24 @@ public class ELearningContextInitListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         logger.info("Context initialized");
-        try {
-            ServerContext.initContext();
-            ResourceBundle bundle = ResourceBundle.getBundle("mysql_hikari");
-            ElDataSource.configure(bundle);
-            DataSource dataSource = ElDataSource.getDataSource();
-            DbMigration.migrate(dataSource);
-            ((HikariDataSource) dataSource).close();
-            HibernateUtil.initSessionFactory();
-        } catch (Throwable e) {
-            logger.error("error", e);
-            throw new RuntimeException("Datasource initialisation error", e);
-        }
+//        try {
+//            ServerContext.initContext();
+//            ResourceBundle bundle = ResourceBundle.getBundle("mysql_hikari");
+//            ElDataSource.configure(bundle);
+//            DataSource dataSource = ElDataSource.getDataSource();
+//            DbMigration.migrate(dataSource);
+//            ((HikariDataSource) dataSource).close();
+//            HibernateUtil.initSessionFactory();
+//        } catch (Throwable e) {
+//            logger.error("error", e);
+//            throw new RuntimeException("Datasource initialisation error", e);
+//        }
     }
 
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         logger.info("Context destroyed");
-        HibernateUtil.shutdown();
-        ServerContext.closeContext();
+//        HibernateUtil.shutdown();
+//        ServerContext.closeContext();
     }
 }

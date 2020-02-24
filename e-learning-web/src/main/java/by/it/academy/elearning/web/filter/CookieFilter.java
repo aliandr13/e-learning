@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = "/*", dispatcherTypes = DispatcherType.REQUEST)
+//@WebFilter(urlPatterns = "/*", dispatcherTypes = DispatcherType.REQUEST)
 public class CookieFilter extends HttpFilter {
 
     private static final Logger logger = LoggerFactory.getLogger(CookieFilter.class);
