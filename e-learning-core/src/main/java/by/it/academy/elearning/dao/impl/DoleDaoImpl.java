@@ -11,7 +11,7 @@ import javax.persistence.TypedQuery;
 
 @Slf4j
 @Repository
-public class DoleDaoImpl extends AbstractDao<Role> implements RoleDao {
+public class DoleDaoImpl extends AbstractDao<Role> implements RoleDao { // RoleDaoImpl
 
     public static final String FIND_BY_ROLE_NAME = "FROM Role where role =: roleName";
 
