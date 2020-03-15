@@ -15,3 +15,5 @@ main > .container {
 code {
     font-size: 80%;
 }
+
+.lh-condensed { line-height: 1.25; }

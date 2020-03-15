@@ -15,14 +15,19 @@
                 <li id="home_li" class="nav-item active">
                     <a class="nav-link" th:href="@{/}" href="home">Home</a>
                 </li>
-                <div sec:authorize="hasRole('ADMIN')">
+                <div sec:authorize="hasRole('TEACHER')">
                     <li id="journal_li" class="nav-item">
                         <a class="nav-link" th:href="@{/journal}" href="/journal">Journal</a>
                     </li>
                 </div>
-                <div sec:authorize="hasRole('USER')">
+                <div sec:authorize="hasRole('STUDENT')">
                     <li id="dairy_li" class="nav-item">
                         <a class="nav-link" th:href="@{/diary}" href="/diary">Diary</a>
+                    </li>
+                </div>
+                <div sec:authorize="hasRole('ADMIN')">
+                    <li id="users_li" class="nav-item">
+                        <a class="nav-link" th:href="@{/users}" href="/users">Users</a>
                     </li>
                 </div>
             </ul>

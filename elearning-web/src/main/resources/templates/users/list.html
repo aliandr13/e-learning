@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>E-Learning Home</title>
+    <title>E-Learning Journal</title>
 
     <meta name="theme-color" content="#563d7c">
     <!-- Bootstrap core CSS -->
@@ -19,22 +19,32 @@
 <!-- Begin page content -->
 <main role="main" class="flex-shrink-0">
     <div class="container">
-        <h1 class="mt-5">Sticky footer with fixed navbar</h1>
-        <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A
-            fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>main &gt; .container</code>.
-        </p>
-        <p>Back to <a href="#">the default sticky footer</a> minus the navbar.</p>
+        <h2 class="mt-5">All users</h2>
+        <ul class="navbar-nav mr-auto">
+            <li id="home_li" class="nav-item active">
+                <a class="nav-link" th:href="@{/users/add}">Add user</a>
+            </li>
+        </ul>
 
-        <p>Spring Security Thymeleaf tutorial</p>
-        <div sec:authorize="hasRole('USER')">Text visible to user.</div>
-        <div sec:authorize="hasRole('ADMIN')">Text visible to admin.</div>
-        <div sec:authorize="isAuthenticated()">
-            Text visible only to authenticated users.
-        </div>
-        Authenticated username:
-        <div sec:authentication="name"></div>
-        Authenticated user roles:
-        <div sec:authentication="principal.authorities"></div>
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">Roles</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <th th:text="${user.id}">#</th>
+                <th th:text="${user.username}">Name</th>
+                <th th:text="${user.password}">Surname</th>
+                <th th:text="${user.role}">Mark</th>
+            </tr>
+            </tbody>
+        </table>
+
     </div>
 </main>
 

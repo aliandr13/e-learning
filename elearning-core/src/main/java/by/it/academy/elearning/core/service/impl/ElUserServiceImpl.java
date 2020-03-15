@@ -32,7 +32,7 @@ public class ElUserServiceImpl extends BaseCrudService<UserRepository, ELUser> i
 
     @Override
     public Optional<ELUser> findByUsername(@NonNull String username) {
-        log.info("Finding user by username:{}", username);
+        log.info("Finding user by username: {}", username);
         return repository.findByUsername(username);
     }
 }
