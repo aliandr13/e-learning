@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>E-Learning Journal</title>
+
+    <meta name="theme-color" content="#563d7c">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.4.1-1/css/bootstrap.min.css}"/>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body class="d-flex flex-column h-100">
+<header>
+    <div th:replace="header :: header"></div>
+</header>
+
+<!-- Begin page content -->
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">14/11</th>
+                <th scope="col">19/11</th>
+                <th scope="col">21/11</th>
+                <th scope="col">26/11</th>
+                <th scope="col">28/11</th>
+                <th scope="col">03/12</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>Ivanov I</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>Petrov P</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>Sidorov S</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+                <td>+</td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <th scope="col" colspan="2">Home Work</th>
+                <th scope="col">
+                    <a href="#" title="Maven" data-toggle="popover" data-trigger="focus"
+                       data-content="Create maven project with Parent module">Maven</a>
+                </th>
+                <th scope="col">maven</th>
+                <th scope="col">web/http</th>
+                <th scope="col">tomcat</th>
+                <th scope="col">git</th>
+                <th scope="col">servlet</th>
+            </tr>
+            </tfoot>
+        </table>
+
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3">
+    <div th:replace="footer :: footer"></div>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.4.1-1/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+</body>
+</html>

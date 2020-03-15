@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>E-Learning Dairy</title>
+
+    <meta name="theme-color" content="#563d7c">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.4.1-1/css/bootstrap.min.css}"/>
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+</head>
+<body class="d-flex flex-column h-100">
+<header>
+    <div th:replace="header :: header"></div>
+</header>
+
+<!-- Begin page content -->
+<main role="main" class="flex-shrink-0">
+    <div class="container">
+
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Date</th>
+                <th scope="col">Topic</th>
+                <th scope="col">Mark</th>
+                <th scope="col">Home work</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">1</th>
+                <td>14/11/2019</td>
+                <td>Maven</td>
+                <td>10</td>
+                <td>Create maven 3 modules: parent, web, core</td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>19/11/2019</td>
+                <td>Maven 2</td>
+                <td>H</td>
+                <td>None</td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>21/11/2019</td>
+                <td>web/http</td>
+                <td>-</td>
+                <td>None</td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>26/11/2019</td>
+                <td>tomcat</td>
+                <td>-</td>
+                <td>None</td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>28/11/2019</td>
+                <td>git</td>
+                <td>10</td>
+                <td>Create git repository in github.com</td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>03/12/2019</td>
+                <td>servlet</td>
+                <td>10</td>
+                <td>Create 2 servlets: with annotations and web.xml</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3">
+    <div th:replace="footer :: footer"></div>
+</footer>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script type="text/javascript" th:src="@{webjars/bootstrap/4.4.1-1/js/bootstrap.min.js}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });
+</script>
+</body>
+</html>

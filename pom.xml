@@ -19,6 +19,7 @@
 
     <modules>
         <module>elearning-web</module>
+        <module>elearning-core</module>
     </modules>
 
     <properties>
