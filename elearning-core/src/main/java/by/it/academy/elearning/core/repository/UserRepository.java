@@ -1,11 +1,12 @@
 package by.it.academy.elearning.core.repository;
 
-import by.it.academy.elearning.core.model.ELUser;
+import by.it.academy.elearning.core.model.User;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends CrudRepository<ELUser, Long> {
+public interface UserRepository extends CrudRepository<User, Long> {
+    Optional<User> findByEmail(String email);
 
-    Optional<ELUser> findByUsername(String username);
+    Boolean existsByEmail(String email);
 }
