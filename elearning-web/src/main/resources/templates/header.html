@@ -26,6 +26,11 @@
                     </li>
                 </div>
                 <div sec:authorize="hasRole('ADMIN')">
+                    <li id="courses_li" class="nav-item">
+                        <a class="nav-link" th:href="@{/courses}" href="/courses">Courses</a>
+                    </li>
+                </div>
+                <div sec:authorize="hasRole('ADMIN')">
                     <li id="users_li" class="nav-item">
                         <a class="nav-link" th:href="@{/users}" href="/users">Users</a>
                     </li>
