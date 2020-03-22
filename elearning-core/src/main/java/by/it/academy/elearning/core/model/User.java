@@ -11,10 +11,9 @@ import javax.persistence.Enumerated;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = "password")
 @EqualsAndHashCode(callSuper = false)
 @SuperBuilder
-
 @Entity
 public class User extends BaseModel {
 

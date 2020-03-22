@@ -23,7 +23,7 @@ public class Course extends BaseModel {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate end;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "teacher_id")
     private User teacher;
 

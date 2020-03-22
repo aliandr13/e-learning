@@ -31,7 +31,8 @@
                     <h4 class="mb-3">Course form</h4>
                     <form class="needs-validation" th:action="@{/courses/add}" th:object="${course}" method="post">
                         <div class="mb-3">
-                            <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="Course name"
+                            <input th:field="*{name}" type="text" class="form-control" id="name"
+                                   placeholder="Course name"
                                    required>
                             <div class="invalid-feedback">Name.</div>
                             <div class="alert alert-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">
@@ -40,7 +41,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="startDate">Start date</label>
-                            <input th:field="*{start}" th:value="*{start}" type="date" class="form-control" id="startDate" required>
+                            <input th:field="*{start}" th:value="*{start}" type="date" class="form-control"
+                                   id="startDate" required>
                             <div class="invalid-feedback">Start</div>
                             <div class="alert alert-danger" th:if="${#fields.hasErrors('start')}"
                                  th:errors="*{start}">Start date error
@@ -54,9 +56,8 @@
                         <div class="mb-3">
                             <label for="country">Teacher</label>
                             <select th:field="*{teacher}" class="custom-select d-block w-100" id="country">
-                                <option value="" selected>Student</option>
-                                <option value="3">Teacher</option>
-                                <option value="1">Admin</option>
+                                <option th:each="teacher : ${teachers}" th:value="${teacher.id}"
+                                        th:text="${teacher.name + ' '+ teacher.surname}"></option>
                             </select>
                             <div class="invalid-feedback">
                                 Please select a valid country.

@@ -7,7 +7,6 @@ import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.CompositeOperation;
 import com.ninja_squad.dbsetup.operation.Operation;
 import lombok.extern.slf4j.Slf4j;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +14,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.sql.DataSource;
+import java.util.List;
 import java.util.Optional;
 
 import static by.it.academy.elearning.core.repository.utils.CommonOperations.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 @Slf4j
@@ -49,14 +50,14 @@ class UserRepositoryTest {
     void findByUsername_shouldReturnEmpty() {
         dbSetupTracker.skipNextLaunch();
         Optional<User> user = userRepository.findByEmail(NAME_NOT_IN_DB);
-        Assertions.assertThat(user).isEmpty();
+        assertThat(user).isEmpty();
     }
 
     @Test
     void findByUsername_shouldReturnUser() {
         dbSetupTracker.skipNextLaunch();
         Optional<User> user = userRepository.findByEmail(EMAIL_1);
-        Assertions.assertThat(user).isNotEmpty().get()
+        assertThat(user).isNotEmpty().get()
                 .hasFieldOrPropertyWithValue(NAME_PROPERTY, NAME_1)
                 .hasFieldOrPropertyWithValue(EMAIL_PROPERTY, EMAIL_1)
                 .hasFieldOrPropertyWithValue(SURNAME_PROPERTY, SURNAME_1)
@@ -68,13 +69,22 @@ class UserRepositoryTest {
     void existsByUsername_shouldReturnTrue() {
         dbSetupTracker.skipNextLaunch();
         Boolean exists = userRepository.existsByEmail(EMAIL_1);
-        Assertions.assertThat(exists).isTrue();
+        assertThat(exists).isTrue();
     }
 
     @Test
     void existsByUsername_shouldReturnFalse() {
         dbSetupTracker.skipNextLaunch();
         Boolean exists = userRepository.existsByEmail(NAME_NOT_IN_DB);
-        Assertions.assertThat(exists).isFalse();
+        assertThat(exists).isFalse();
     }
+
+    @Test
+    void findByRole_shouldReturnList() {
+        dbSetupTracker.skipNextLaunch();
+        List<User> byRole = userRepository.findByRole(ROLE_1);
+        assertThat(byRole).isNotEmpty().hasSize(1);
+        assertThat(byRole.get(0)).hasFieldOrPropertyWithValue("role", ROLE_1);
+    }
+
 }
