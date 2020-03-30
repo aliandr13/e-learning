@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
+import java.util.List;
+
 @Slf4j
 @Service
 @Transactional
@@ -18,4 +21,8 @@ public class CourseServiceImpl extends BaseCrudService<CourseRepository, Course>
         super(courseRepository, log);
     }
 
+    @Override
+    public List<Course> findByTeacher(Long teacherId) {
+        return Collections.emptyList();
+    }
 }

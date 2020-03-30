@@ -4,9 +4,12 @@ import by.it.academy.elearning.core.model.Course;
 import by.it.academy.elearning.core.model.User;
 import by.it.academy.elearning.core.service.CourseService;
 import by.it.academy.elearning.core.service.UserService;
+import by.it.academy.elearning.web.exception.ForbiddenException;
+import by.it.academy.elearning.web.security.ElUser;
 import by.it.academy.elearning.web.validation.CourseValidator;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,10 +37,21 @@ public class CourseController {
     }
 
     @RequestMapping(method = RequestMethod.GET)
-    public String getAll(Model model) {
-        List<Course> courses = courseService.findAll();
+    public String getAll(Model model, Authentication authentication) {
+        ElUser user = (ElUser) authentication.getPrincipal();
+        List<Course> courses = getCoursesByUser(user);
         model.addAttribute("courses", courses);
         return "courses/list";
+    }
+
+    private List<Course> getCoursesByUser(ElUser user) {
+        if (user.isAdmin()) {
+            return courseService.findAll();
+        } else if (user.isTeacher()) {
+            return courseService.findByTeacher(user.getId());
+        } else {
+            throw new ForbiddenException();
+        }
     }
 
 

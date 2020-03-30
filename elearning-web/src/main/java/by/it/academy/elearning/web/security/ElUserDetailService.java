@@ -23,8 +23,9 @@ public class ElUserDetailService implements UserDetailsService {
         User user = userService.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        return org.springframework.security.core.userdetails.User.builder()
-                .username(user.getEmail())
+        return ElUser.elBuilder()
+                .id(user.getId())
+                .username(user.getName())
                 .password(user.getPassword())
                 .roles(user.getRole().name()).build();
     }

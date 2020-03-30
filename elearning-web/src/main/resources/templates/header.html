@@ -25,7 +25,7 @@
                         <a class="nav-link" th:href="@{/diary}" href="/diary">Diary</a>
                     </li>
                 </div>
-                <div sec:authorize="hasRole('ADMIN')">
+                <div sec:authorize="hasAnyRole('ADMIN', 'TEACHER')">
                     <li id="courses_li" class="nav-item">
                         <a class="nav-link" th:href="@{/courses}" href="/courses">Courses</a>
                     </li>

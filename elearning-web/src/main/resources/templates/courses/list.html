@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -20,8 +20,8 @@
 <!-- Begin page content -->
 <main role="main" class="flex-shrink-0">
     <div class="container">
-        <h2 class="mt-5">All groups</h2>
-        <ul class="navbar-nav mr-auto">
+        <h2 class="mt-5">Groups</h2>
+        <ul class="navbar-nav mr-auto" sec:authorize="hasRole('ADMIN')">
             <li id="home_li" class="nav-item active">
                 <a class="nav-link" th:href="@{/courses/add}">Add course</a>
             </li>

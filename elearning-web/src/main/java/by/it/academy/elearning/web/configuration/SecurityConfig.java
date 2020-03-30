@@ -38,7 +38,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .mvcMatchers("/journal").hasRole("TEACHER")
                 .mvcMatchers("/users", "/users/**").hasRole("ADMIN")
-                .mvcMatchers("/courses", "/courses/**").hasRole("ADMIN")
+                .mvcMatchers("/courses", "/courses/**").hasAnyRole("ADMIN", "TEACHER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
