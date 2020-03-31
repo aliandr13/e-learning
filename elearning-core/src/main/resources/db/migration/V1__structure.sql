@@ -1,24 +1,5 @@
 create schema IF NOT EXISTS elearning;
 
-create table home_work
-(
-    id          bigint auto_increment primary key,
-    created     datetime(6)  null,
-    updated     datetime(6)  null,
-    description varchar(255) null,
-    task        varchar(255) null
-);
-
-create table lesson
-(
-    id          bigint auto_increment primary key,
-    created     datetime(6)  null,
-    updated     datetime(6)  null,
-    date        date         null,
-    description varchar(255) null,
-    topic       varchar(255) null
-);
-
 create table user
 (
     id       bigint auto_increment primary key,
@@ -46,3 +27,35 @@ create table course
         foreign key (teacher_id) references user (id)
 );
 
+
+create table lesson
+(
+    id          bigint auto_increment primary key,
+    created     datetime(6)  null,
+    updated     datetime(6)  null,
+    date        date         null,
+    description varchar(255) null,
+    topic       varchar(255) null,
+    course_id   bigint       not null,
+    constraint FK_lesson_course
+        foreign key (course_id) references elearning.course (id)
+);
+
+create table courses_students
+(
+    course_id  bigint not null,
+    student_id bigint not null,
+    constraint FK_student_course
+        foreign key (student_id) references elearning.user (id),
+    constraint FK_course_student
+        foreign key (course_id) references elearning.course (id)
+);
+
+create table home_work
+(
+    id          bigint auto_increment primary key,
+    created     datetime(6)  null,
+    updated     datetime(6)  null,
+    description varchar(255) null,
+    task        varchar(255) null
+);

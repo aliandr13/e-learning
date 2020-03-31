@@ -22,7 +22,7 @@
 <main role="main" class="flex-shrink-0">
     <div class="container">
         <h2 class="mt-5">Course
-            <snap th:text="${course.course.name}"></snap>
+            <snap th:text="${course.name}"></snap>
         </h2>
 
         <table class="table table-bordered table-hover">
@@ -39,39 +39,15 @@
                 <td th:text="${student.name}"></td>
                 <td th:each="lesson : ${course.lessons}">+</td>
             </tr>
-<!--            <tr>-->
-<!--                <th scope="row">2</th>-->
-<!--                <td>Petrov P</td>-->
-<!--                <td>+</td>-->
-<!--                <td>+</td>-->
-<!--                <td>+</td>-->
-<!--                <td>+</td>-->
-<!--                <td>+</td>-->
-<!--                <td>+</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <th scope="row">3</th>-->
-<!--                <td>Sidorov S</td>-->
-<!--                <td>+</td>-->
-<!--                <td>+</td>-->
-<!--                <td>+</td>-->
-<!--                <td>+</td>-->
-<!--                <td>+</td>-->
-<!--                <td>+</td>-->
-<!--            </tr>-->
+
             </tbody>
             <tfoot>
             <tr>
-                <th scope="col" colspan="2">Home Work</th>
-                <th scope="col">
-                    <a href="#" title="Maven" data-toggle="popover" data-trigger="focus"
-                       data-content="Create maven project with Parent module">Maven</a>
+                <th scope="col" colspan="2">Topic</th>
+                <th scope="col" th:each="lesson : ${course.lessons}">
+                    <a href="#" title="Maven" th:text="${lesson.topic}" data-toggle="popover" data-trigger="focus"
+                       th:attr="data-content=${lesson.description}" data-content="">Maven</a>
                 </th>
-<!--                <th scope="col">maven</th>-->
-<!--                <th scope="col">web/http</th>-->
-<!--                <th scope="col">tomcat</th>-->
-<!--                <th scope="col">git</th>-->
-<!--                <th scope="col">servlet</th>-->
             </tr>
             </tfoot>
         </table>

@@ -1,11 +1,11 @@
 package by.it.academy.elearning.web.controller;
 
 import by.it.academy.elearning.core.model.Course;
+import by.it.academy.elearning.core.model.Lesson;
 import by.it.academy.elearning.core.model.User;
 import by.it.academy.elearning.core.service.CourseService;
 import by.it.academy.elearning.core.service.LessonService;
 import by.it.academy.elearning.core.service.UserService;
-import by.it.academy.elearning.web.dto.CourseDto;
 import by.it.academy.elearning.web.exception.ForbiddenException;
 import by.it.academy.elearning.web.exception.NotFoundExceptionException;
 import by.it.academy.elearning.web.security.ElUser;
@@ -53,12 +53,10 @@ public class CourseController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getCourse(@PathVariable("id") Long id, Model model) {
-        Course course = courseService.findById(id).orElseThrow(NotFoundExceptionException::new);
-        CourseDto courseDto = CourseDto.builder()
-                .course(course)
-                .lessons(lessonService.findByCourse(course))
-                .students(userService.findAll()).build();
-        model.addAttribute("course", courseDto);
+        Course course = courseService.findByIdWithStudents(id).orElseThrow(NotFoundExceptionException::new);
+        List<Lesson> lessons = lessonService.findByCourse(course);
+        course.setLessons(lessons);
+        model.addAttribute("course", course);
         return "courses/course";
     }
 

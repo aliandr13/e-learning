@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -29,5 +30,10 @@ public class CourseServiceImpl extends BaseCrudService<CourseRepository, Course>
         List<Course> courses = courseRepository.findByTeacherId(teacherId);
         log.debug("Found {} results", courses.size());
         return courses;
+    }
+
+    @Override
+    public Optional<Course> findByIdWithStudents(Long id) {
+        return courseRepository.findByIdWithStudents(id);
     }
 }
