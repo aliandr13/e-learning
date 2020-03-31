@@ -1,128 +1,92 @@
 package by.it.academy.elearning.core.service.impl;
 
 import by.it.academy.elearning.core.model.User;
-import by.it.academy.elearning.core.model.UserRole;
-import by.it.academy.elearning.core.service.UserService;
-import com.ninja_squad.dbsetup.DbSetup;
-import com.ninja_squad.dbsetup.DbSetupTracker;
-import com.ninja_squad.dbsetup.destination.DataSourceDestination;
-import com.ninja_squad.dbsetup.operation.CompositeOperation;
-import com.ninja_squad.dbsetup.operation.Operation;
+import by.it.academy.elearning.core.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
-import javax.sql.DataSource;
-import java.util.List;
 import java.util.Optional;
 
-import static by.it.academy.elearning.core.repository.utils.CommonOperations.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
-@SpringBootTest
-@Transactional
 class UserServiceImplTest {
 
-    private static DbSetupTracker dbSetupTracker = new DbSetupTracker();
+    @Mock
+    private  UserRepository userRepository;
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private DataSource dataSource;
+    @InjectMocks
+    private UserServiceImpl userService;
 
     @BeforeEach
     void setUp() {
-        Operation operation = CompositeOperation.sequenceOf(
-                DELETE_ALL,
-                ADD_USERS
-        );
-        DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
-
-        dbSetupTracker.launchIfNecessary(dbSetup);
+        MockitoAnnotations.initMocks(this);
     }
 
     @Test
-    void saveTest() {
-        User build = User.builder()
-                .email("email@email.com")
-                .name("new name")
-                .surname("new surname")
-                .password("new Password")
-                .role(UserRole.ADMIN).build();
+    public void testFindByEmail_withWhiteSpaces() {
+        // given
+        User value = new User();
+        value.setEmail("email");
+        Mockito.when(userRepository.findByEmail("email")).thenReturn(Optional.of(value));
+        Mockito.when(userRepository.findByEmail("  email   ")).thenReturn(Optional.empty());
 
         // when
-        User user = userService.create(build);
-        Optional<User> found = userService.findById(user.getId());
+        Optional<User> user = userService.findByEmail("  email   ");
 
         // then
-        assertThat(found).isNotEmpty().get()
-                .hasFieldOrPropertyWithValue(NAME_PROPERTY, build.getName())
-                .hasFieldOrPropertyWithValue(EMAIL_PROPERTY, build.getEmail())
-                .hasFieldOrPropertyWithValue(SURNAME_PROPERTY, build.getSurname())
-                .hasFieldOrPropertyWithValue(PASSWORD_PROPERTY, build.getPassword())
-                .hasFieldOrPropertyWithValue(ROLE_PROPERTY, build.getRole());
-        assertThat(user).isEqualTo(found.get());
+        assertEquals("email", user.orElseThrow().getEmail());
     }
 
     @Test
-    void findByIdTest() {
-        Optional<User> found = userService.findById(1L);
+    public void testFindByEmail_withUpperCase() {
+        // given
+        User value = new User();
+        value.setEmail("email");
+        Mockito.when(userRepository.findByEmail("email")).thenReturn(Optional.of(value));
+        Mockito.when(userRepository.findByEmail("EMAIL")).thenReturn(Optional.empty());
 
-        assertThat(found).isNotEmpty().get()
-                .hasFieldOrPropertyWithValue(NAME_PROPERTY, NAME_1)
-                .hasFieldOrPropertyWithValue(EMAIL_PROPERTY, EMAIL_1)
-                .hasFieldOrPropertyWithValue(SURNAME_PROPERTY, SURNAME_1)
-                .hasFieldOrPropertyWithValue(PASSWORD_PROPERTY, PASS_1)
-                .hasFieldOrPropertyWithValue(ROLE_PROPERTY, ROLE_1);
+        // when
+        Optional<User> user = userService.findByEmail("EMAIL");
+
+        // then
+        assertEquals("email", user.orElseThrow().getEmail());
+        Mockito.verify(userRepository).findByEmail("email");
     }
 
-//    @Test
-//    void updateTest() {
-//        User saved = createNewTeacher();
-//
-//        String updated_name = "UPDATED_NAME";
-//        saved.setName(updated_name);
-//        userService.update(saved);
-//
-//        User found = userService.findById(saved.getId())
-//                .orElseThrow(() -> new RuntimeException("Not found"));
-//
-//        assertThat(found.getName()).isEqualTo(updated_name);
-//    }
+    @Test
+    public void testFindByEmail() {
+        // given
+        User user = new User();
+        user.setEmail("email");
+        Mockito.when(userRepository.findByEmail("email")).thenReturn(Optional.of(user));
 
-//    @Test
-//    void deleteTest() {
-//        User saved = createNewTeacher();
-//
-//        userService.delete(saved);
-//
-//        Optional<User> found = userService.findById(saved.getId());
-//
-//        assertThat(found.isEmpty()).isTrue();
-//    }
-//
-//    @Test
-//    void deleteByIdTest() {
-//        User saved = createNewTeacher();
-//
-//        userService.delete(saved.getId());
-//
-//        Optional<User> found = userService.findById(saved.getId());
-//
-//        assertThat(found.isEmpty()).isTrue();
-//    }
+        // when
+        Optional<User> userFromBD = userService.findByEmail("email");
+
+        // then
+        assertTrue(userFromBD.isPresent());
+        assertEquals("email", userFromBD.get().getEmail());
+    }
 
     @Test
-    void findAllTest() {
-        dbSetupTracker.skipNextLaunch();
+    public void testFindByEmail_notFound() {
+        // given
+        User user = new User();
+        user.setEmail("email");
+        Mockito.when(userRepository.findByEmail("email")).thenReturn(Optional.empty());
 
-        List<User> found = userService.findAll();
+        // when
+        Optional<User> userFromBD = userService.findByEmail("email");
 
-        assertThat(found).isNotEmpty().hasSize(2);
+        // then
+        assertTrue(userFromBD.isEmpty());
     }
 
 }
