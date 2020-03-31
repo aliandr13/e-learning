@@ -1,6 +1,6 @@
 <!DOCTYPE HTML>
 <html lang="en" class="h-100" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -21,32 +21,59 @@
 <!-- Begin page content -->
 <main role="main" class="flex-shrink-0">
     <div class="container">
-        <h2 class="mt-5">Courses</h2>
-        <ul class="navbar-nav mr-auto" sec:authorize="hasRole('ADMIN')">
-            <li id="home_li" class="nav-item active">
-                <a class="nav-link" th:href="@{/courses/add}">Add course</a>
-            </li>
-        </ul>
+        <h2 class="mt-5">Course
+            <snap th:text="${course.course.name}"></snap>
+        </h2>
 
         <table class="table table-bordered table-hover">
             <thead>
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Start date</th>
-                <th scope="col">Finish date</th>
-                <th scope="col">Teacher</th>
+                <th th:each="lesson : ${course.lessons}" scope="col" th:text="${lesson.date}"></th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="course : ${courses}">
-                <th th:text="${course.id}"></th>
-                <th><a th:href="@{/courses/{id}(id=${course.id})}" th:text="${course.name}"></a></th>
-                <th th:text="${course.start}"></th>
-                <th th:text="${course.end}"></th>
-                <th th:text="${course.getTeacher() != null} ? ${course.teacher.name + ' '+ course.teacher.surname} : 'No Teacher selected'"></th>
+            <tr th:each="student : ${course.students}">
+                <th scope="row" th:text="${student.id}"></th>
+                <td th:text="${student.name}"></td>
+                <td th:each="lesson : ${course.lessons}">+</td>
             </tr>
+<!--            <tr>-->
+<!--                <th scope="row">2</th>-->
+<!--                <td>Petrov P</td>-->
+<!--                <td>+</td>-->
+<!--                <td>+</td>-->
+<!--                <td>+</td>-->
+<!--                <td>+</td>-->
+<!--                <td>+</td>-->
+<!--                <td>+</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <th scope="row">3</th>-->
+<!--                <td>Sidorov S</td>-->
+<!--                <td>+</td>-->
+<!--                <td>+</td>-->
+<!--                <td>+</td>-->
+<!--                <td>+</td>-->
+<!--                <td>+</td>-->
+<!--                <td>+</td>-->
+<!--            </tr>-->
             </tbody>
+            <tfoot>
+            <tr>
+                <th scope="col" colspan="2">Home Work</th>
+                <th scope="col">
+                    <a href="#" title="Maven" data-toggle="popover" data-trigger="focus"
+                       data-content="Create maven project with Parent module">Maven</a>
+                </th>
+<!--                <th scope="col">maven</th>-->
+<!--                <th scope="col">web/http</th>-->
+<!--                <th scope="col">tomcat</th>-->
+<!--                <th scope="col">git</th>-->
+<!--                <th scope="col">servlet</th>-->
+            </tr>
+            </tfoot>
         </table>
 
     </div>
@@ -64,5 +91,9 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('[data-toggle="popover"]').popover();
+    });</script>
 </body>
 </html>

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -16,13 +15,19 @@ import java.util.List;
 @Transactional
 public class CourseServiceImpl extends BaseCrudService<CourseRepository, Course> implements CourseService {
 
+    private final CourseRepository courseRepository;
+
     @Autowired
     public CourseServiceImpl(CourseRepository courseRepository) {
         super(courseRepository, log);
+        this.courseRepository = courseRepository;
     }
 
     @Override
     public List<Course> findByTeacher(Long teacherId) {
-        return Collections.emptyList();
+        log.info("Find courses by teacher id: {}", teacherId);
+        List<Course> courses = courseRepository.findByTeacherId(teacherId);
+        log.debug("Found {} results", courses.size());
+        return courses;
     }
 }

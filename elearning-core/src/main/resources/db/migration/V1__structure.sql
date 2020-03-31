@@ -1,4 +1,4 @@
-create schema IF NOT EXISTS elearning collate utf8mb4_0900_ai_ci;
+create schema IF NOT EXISTS elearning;
 
 create table home_work
 (

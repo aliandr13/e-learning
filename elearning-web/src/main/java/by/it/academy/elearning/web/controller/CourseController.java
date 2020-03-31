@@ -1,10 +1,13 @@
 package by.it.academy.elearning.web.controller;
 
 import by.it.academy.elearning.core.model.Course;
+import by.it.academy.elearning.core.model.Lesson;
 import by.it.academy.elearning.core.model.User;
 import by.it.academy.elearning.core.service.CourseService;
 import by.it.academy.elearning.core.service.UserService;
+import by.it.academy.elearning.web.dto.CourseDto;
 import by.it.academy.elearning.web.exception.ForbiddenException;
+import by.it.academy.elearning.web.exception.NotFoundExceptionException;
 import by.it.academy.elearning.web.security.ElUser;
 import by.it.academy.elearning.web.validation.CourseValidator;
 import lombok.extern.slf4j.Slf4j;
@@ -15,9 +18,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @Slf4j
@@ -42,6 +48,19 @@ public class CourseController {
         List<Course> courses = getCoursesByUser(user);
         model.addAttribute("courses", courses);
         return "courses/list";
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public String getCourse(@PathVariable("id") Long id, Model model) {
+        Course course = courseService.findById(id).orElseThrow(NotFoundExceptionException::new);
+        CourseDto courseDto = new CourseDto();
+        courseDto.setCourse(course);
+        Lesson lessons = new Lesson();
+        lessons.setDate(LocalDate.now().minusDays(3));
+        courseDto.setLessons(Collections.singletonList(lessons));
+        courseDto.setStudents(userService.findAll());
+        model.addAttribute("course", courseDto);
+        return "courses/course";
     }
 
     private List<Course> getCoursesByUser(ElUser user) {
