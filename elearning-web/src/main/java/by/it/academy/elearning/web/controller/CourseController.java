@@ -57,7 +57,7 @@ public class CourseController {
         CourseDto courseDto = CourseDto.builder()
                 .course(course)
                 .lessons(lessonService.findByCourse(course))
-                .students(userService.findStudentsByCourse(course)).build();
+                .students(userService.findAll()).build();
         model.addAttribute("course", courseDto);
         return "courses/course";
     }
