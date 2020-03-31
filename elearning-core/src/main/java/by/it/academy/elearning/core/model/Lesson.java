@@ -2,7 +2,7 @@ package by.it.academy.elearning.core.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
@@ -11,10 +11,14 @@ import java.time.LocalDate;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Lesson extends BaseModel{
+public class Lesson extends BaseModel {
 
     private LocalDate date;
     private String topic;
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+    @JoinColumn(name = "course_id", nullable = false)
+    private Course course;
 
 }

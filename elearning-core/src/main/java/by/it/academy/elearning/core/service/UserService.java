@@ -1,5 +1,6 @@
 package by.it.academy.elearning.core.service;
 
+import by.it.academy.elearning.core.model.Course;
 import by.it.academy.elearning.core.model.User;
 
 import java.util.List;

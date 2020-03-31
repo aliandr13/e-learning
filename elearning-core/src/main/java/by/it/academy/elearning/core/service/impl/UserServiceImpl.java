@@ -1,5 +1,6 @@
 package by.it.academy.elearning.core.service.impl;
 
+import by.it.academy.elearning.core.model.Course;
 import by.it.academy.elearning.core.model.User;
 import by.it.academy.elearning.core.model.UserRole;
 import by.it.academy.elearning.core.repository.UserRepository;

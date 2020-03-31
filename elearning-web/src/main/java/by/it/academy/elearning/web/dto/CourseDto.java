@@ -3,12 +3,17 @@ package by.it.academy.elearning.web.dto;
 import by.it.academy.elearning.core.model.Course;
 import by.it.academy.elearning.core.model.Lesson;
 import by.it.academy.elearning.core.model.User;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@Builder
+@AllArgsConstructor
+@No
 public class CourseDto {
 
     private Course course;
