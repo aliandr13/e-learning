@@ -21,10 +21,11 @@
 <!-- Begin page content -->
 <main role="main" class="flex-shrink-0">
     <div class="container">
-        <h2 class="mt-5">Courses</h2>
-        <ul class="navbar-nav mr-auto" sec:authorize="hasRole('ADMIN')">
+        <h2 class="mt-5">Lessons</h2>
+
+        <ul class="navbar-nav mr-auto" sec:authorize="hasAnyRole('ADMIN', 'TEACHER')">
             <li id="home_li" class="nav-item active">
-                <a class="nav-link" th:href="@{/courses/add}">Add course</a>
+                <a class="nav-link" th:href="@{/courses/{id}/lessons/add(id=${course.id})}">Add lesson</a>
             </li>
         </ul>
 
@@ -32,21 +33,17 @@
             <thead>
             <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Start date</th>
-                <th scope="col">Finish date</th>
-                <th scope="col">Teacher</th>
-                <th scope="col">Lessons</th>
+                <th scope="col">Date</th>
+                <th scope="col">Topic</th>
+                <th scope="col">Description</th>
             </tr>
             </thead>
             <tbody>
-            <tr th:each="course : ${courses}">
-                <th th:text="${course.id}"></th>
-                <th><a th:href="@{/courses/{id}(id=${course.id})}" th:text="${course.name}"></a></th>
-                <th th:text="${course.start}"></th>
-                <th th:text="${course.end}"></th>
-                <th th:text="${course.getTeacher() != null} ? ${course.teacher.name + ' '+ course.teacher.surname} : 'No Teacher selected'"></th>
-                <th><a th:href="@{/courses/{id}/lessons(id=${course.id})}">Lessons list</a></th>
+            <tr th:each="lesson : ${course.lessons}">
+                <th th:text="${lesson.id}"></th>
+                <th th:text="${lesson.date}"></th>
+                <th th:text="${lesson.topic}"></th>
+                <th th:text="${lesson.description}"></th>
             </tr>
             </tbody>
         </table>

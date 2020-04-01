@@ -54,7 +54,7 @@ public class CourseController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getCourse(@PathVariable("id") Long id, Model model) {
         Course course = courseService.findByIdWithStudents(id).orElseThrow(NotFoundExceptionException::new);
-        List<Lesson> lessons = lessonService.findByCourse(course);
+        List<Lesson> lessons = lessonService.findByCourse(course.getId());
         course.setLessons(lessons);
         model.addAttribute("course", course);
         return "courses/course";

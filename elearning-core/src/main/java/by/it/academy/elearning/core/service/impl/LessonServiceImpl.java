@@ -1,6 +1,5 @@
 package by.it.academy.elearning.core.service.impl;
 
-import by.it.academy.elearning.core.model.Course;
 import by.it.academy.elearning.core.model.Lesson;
 import by.it.academy.elearning.core.repository.LessonRepository;
 import by.it.academy.elearning.core.service.LessonService;
@@ -25,9 +24,9 @@ public class LessonServiceImpl extends BaseCrudService<LessonRepository, Lesson>
     }
 
     @Override
-    public List<Lesson> findByCourse(Course course) {
-        log.info("Find lessons by course {}", course);
-        List<Lesson> lessons = repository.findByCourse_Id(course.getId());
+    public List<Lesson> findByCourse(Long courseId) {
+        log.info("Find lessons by course Id: {}", courseId);
+        List<Lesson> lessons = repository.findByCourse_Id(courseId);
         log.debug("Find lessons by course result {}", lessons.size());
         return lessons;
     }

@@ -13,7 +13,6 @@ import java.util.Optional;
 
 @Slf4j
 @Service
-@Transactional
 public class CourseServiceImpl extends BaseCrudService<CourseRepository, Course> implements CourseService {
 
     private final CourseRepository courseRepository;
@@ -25,6 +24,7 @@ public class CourseServiceImpl extends BaseCrudService<CourseRepository, Course>
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Course> findByTeacher(Long teacherId) {
         log.info("Find courses by teacher id: {}", teacherId);
         List<Course> courses = courseRepository.findByTeacherId(teacherId);
@@ -33,7 +33,14 @@ public class CourseServiceImpl extends BaseCrudService<CourseRepository, Course>
     }
 
     @Override
-    public Optional<Course> findByIdWithStudents(Long id) {
-        return courseRepository.findByIdWithStudents(id);
+    @Transactional(readOnly = true)
+    public Optional<Course> findByIdWithStudents(Long courseId) {
+        return courseRepository.findByIdWithStudents(courseId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Course> findByIdWithLessons(Long courseId) {
+        return courseRepository.findByIdWithLessons(courseId);
     }
 }

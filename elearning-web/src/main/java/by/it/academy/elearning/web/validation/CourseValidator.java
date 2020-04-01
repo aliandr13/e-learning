@@ -12,8 +12,8 @@ import java.time.LocalDate;
 @Component
 public class CourseValidator implements Validator {
 
-    private static final LocalDate MIN_DATE = LocalDate.of(2020, 1, 1);
-    private static final LocalDate MAX_DATE = LocalDate.of(2030, 1, 1);
+    private static final LocalDate MIN_DATE = LocalDate.of(2010, 1, 1);
+    private static final LocalDate MAX_DATE = LocalDate.of(2050, 1, 1);
 
     @Override
     public boolean supports(Class<?> clazz) {

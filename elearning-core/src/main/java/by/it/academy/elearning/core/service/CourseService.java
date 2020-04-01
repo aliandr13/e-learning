@@ -10,6 +10,8 @@ public interface CourseService extends CrudService<Course> {
     List<Course> findByTeacher(Long teacherId);
 
 
-    Optional<Course> findByIdWithStudents(Long id);
+    Optional<Course> findByIdWithStudents(Long courseId);
+
+    Optional<Course> findByIdWithLessons(Long courseId);
 
 }

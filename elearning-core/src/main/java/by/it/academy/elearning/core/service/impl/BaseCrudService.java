@@ -19,6 +19,7 @@ abstract class BaseCrudService<Repository extends CrudRepository<Model, Long>, M
     }
 
     @Override
+    @Transactional
     public Model create(Model model) {
         log.info("Creating {}", model);
         return repository.save(model);
@@ -32,18 +33,21 @@ abstract class BaseCrudService<Repository extends CrudRepository<Model, Long>, M
     }
 
     @Override
+    @Transactional
     public void update(Model model) {
         log.info("Updating {}", model);
         repository.save(model);
     }
 
     @Override
+    @Transactional
     public void delete(Model model) {
         log.info("Deleting {}", model);
         repository.delete(model);
     }
 
     @Override
+    @Transactional
     public void delete(Long id) {
         log.info("Deleting by id {}", id);
         repository.deleteById(id);
