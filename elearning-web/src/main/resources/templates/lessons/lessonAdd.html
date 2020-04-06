@@ -21,13 +21,14 @@
 <main role="main" class="flex-shrink-0">
     <div class="container">
         <div class="py-5 text-center">
-            <h2>Add Lesson</h2>
+            <h2>Add Lesson to course <span th:text="${current_course.name}"></span></h2>
 
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <h4 class="mb-3">Lesson form</h4>
-                    <form class="needs-validation" th:action="@{/course/{courseId}/lessons/add(courseId=${courseId})}"
+                    <form class="needs-validation"
+                          th:action="@{/courses/{courseId}/lessons/add(courseId=${current_course.id})}"
                           th:object="${lesson}" method="post">
                         <div class="mb-3">
                             <input th:field="*{topic}" type="text" class="form-control" id="topic"
@@ -55,7 +56,7 @@
                                 Description Error
                             </div>
                         </div>
-
+                        <input hidden id="course" name="course" th:value="${current_course.id}">
                         <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
                     </form>
                 </div>

@@ -2,6 +2,7 @@ package by.it.academy.elearning.web.controller;
 
 import by.it.academy.elearning.core.model.Course;
 import by.it.academy.elearning.core.model.Lesson;
+import by.it.academy.elearning.core.model.StudentWork;
 import by.it.academy.elearning.core.model.User;
 import by.it.academy.elearning.core.service.CourseService;
 import by.it.academy.elearning.core.service.LessonService;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.HashMap;
 import java.util.List;
 
 @Slf4j
@@ -54,9 +56,10 @@ public class CourseController {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public String getCourse(@PathVariable("id") Long id, Model model) {
         Course course = courseService.findByIdWithStudents(id).orElseThrow(NotFoundExceptionException::new);
-        List<Lesson> lessons = lessonService.findByCourse(course.getId());
+        var lessons = lessonService.findByCourse(course.getId());
         course.setLessons(lessons);
         model.addAttribute("course", course);
+        model.addAttribute("map", new HashMap<User, StudentWork>());
         return "courses/course";
     }
 

@@ -1,9 +1,11 @@
 package by.it.academy.elearning.web.controller;
 
+import by.it.academy.elearning.core.model.Course;
 import by.it.academy.elearning.core.model.Lesson;
 import by.it.academy.elearning.core.service.CourseService;
 import by.it.academy.elearning.core.service.LessonService;
 import by.it.academy.elearning.web.exception.NotFoundExceptionException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
 
+@Slf4j
 @Controller
 public class LessonController {
 
@@ -36,14 +39,16 @@ public class LessonController {
 
     @RequestMapping(value = "/courses/{courseId}/lessons/add", method = RequestMethod.GET)
     public String addLessonPage(Model model, @PathVariable("courseId") Long id) {
-        model.addAttribute("courseId", id);
+        Course attributeValue = courseService.findById(id).orElseThrow();
+        model.addAttribute("current_course", attributeValue);
         model.addAttribute("lesson", new Lesson());
         return "lessons/lessonAdd";
     }
 
-    @RequestMapping(value = "/courses/{courseId}/lessons/add", method = RequestMethod.GET)
+    @RequestMapping(value = "/courses/{courseId}/lessons/add", method = RequestMethod.POST)
     public String addLessonSubmit(@PathVariable("courseId") Long id, @Valid @ModelAttribute("lesson") Lesson lesson, BindingResult bindingResult) {
-
+        log.debug("Lesson: {}", lesson);
+        lessonService.create(lesson);
         return "redirect:/courses/" + id + "/lessons";
     }
 

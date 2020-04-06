@@ -37,7 +37,7 @@
             <tr th:each="student : ${course.students}">
                 <th scope="row" th:text="${student.id}"></th>
                 <td th:text="${student.name}"></td>
-                <td th:each="lesson : ${course.lessons}">+</td>
+                <td th:each="lesson : ${course.lessons}" th:text="${lesson.studentWorks}"></td>
             </tr>
 
             </tbody>

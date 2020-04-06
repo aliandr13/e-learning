@@ -28,6 +28,10 @@ public class CourseValidator implements Validator {
 
         Course course = (Course) target;
 
+        if (course.getEnd() == null || course.getStart() == null) {
+            return;
+        }
+
         if (course.getStart().isAfter(course.getEnd())) {
             errors.rejectValue("start", "dates.overlaps");
         }
