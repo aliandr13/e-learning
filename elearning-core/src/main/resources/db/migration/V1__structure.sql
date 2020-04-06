@@ -56,14 +56,14 @@ create table student_work
 (
     id         bigint auto_increment primary key,
     absent     bit          null,
-    mark       double(2, 1) null,
+    mark       double(3, 1) null,
     lesson_id  bigint       not null,
     student_id bigint       not null,
     created    datetime(6)  null,
     updated    datetime(6)  null,
     constraint FK_lesson_student_work
-        foreign key (lesson_id) references user (id) ON DELETE CASCADE,
+        foreign key (lesson_id) references lesson (id) ON DELETE CASCADE,
     constraint FK_student_student_work
-        foreign key (student_id) references course (id) ON DELETE CASCADE
+        foreign key (student_id) references user (id) ON DELETE CASCADE
 );
 

@@ -26,8 +26,9 @@ public class LessonServiceImpl extends BaseCrudService<LessonRepository, Lesson>
     @Override
     public List<Lesson> findByCourse(Long courseId) {
         log.info("Find lessons by course Id: {}", courseId);
-        List<Lesson> lessons = repository.findByCourse_Id(courseId);
+        List<Lesson> lessons = repository.findByCourseIdWithStudentWorks(courseId);
         log.debug("Find lessons by course result {}", lessons.size());
         return lessons;
     }
+
 }

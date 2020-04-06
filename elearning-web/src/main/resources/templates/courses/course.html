@@ -37,7 +37,12 @@
             <tr th:each="student : ${course.students}">
                 <th scope="row" th:text="${student.id}"></th>
                 <td th:text="${student.name}"></td>
-                <td th:each="lesson : ${course.lessons}" th:text="${lesson.studentWorks}"></td>
+                <td th:each="lesson : ${course.lessons}">
+                    <div th:with="work=${map.get(lesson.id + '_' + student.id)}">
+                        <span th:text="${work.absent} ? 'ABSENT' :  ${work.mark}"></span>
+                    </div>
+                </td>
+
             </tr>
 
             </tbody>

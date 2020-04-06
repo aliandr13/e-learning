@@ -7,4 +7,5 @@ import java.util.List;
 public interface LessonService extends CrudService<Lesson> {
 
     List<Lesson> findByCourse(Long courseId);
+
 }

@@ -59,7 +59,15 @@ public class CourseController {
         var lessons = lessonService.findByCourse(course.getId());
         course.setLessons(lessons);
         model.addAttribute("course", course);
-        model.addAttribute("map", new HashMap<User, StudentWork>());
+
+        var map = new HashMap<String, StudentWork>();
+        for (Lesson lesson : lessons) {
+            for (StudentWork studentWork : lesson.getStudentWorks()) {
+                map.put(lesson.getId().toString() + "_" + studentWork.getStudent().getId(), studentWork);
+            }
+        }
+
+        model.addAttribute("map", map);
         return "courses/course";
     }
 
