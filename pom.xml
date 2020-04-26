@@ -5,21 +5,21 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.5.RELEASE</version>
+        <version>2.2.6.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
     <groupId>by.it.academy</groupId>
-    <artifactId>elearning</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>e-learning</artifactId>
+    <version>0.0.2</version>
     <packaging>pom</packaging>
 
     <name>e-learning</name>
     <description>ELearning project</description>
 
     <modules>
-        <module>elearning-web</module>
-        <module>elearning-core</module>
+        <module>e-learning-core</module>
+        <module>e-learning-web</module>
     </modules>
 
     <properties>

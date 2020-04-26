@@ -47,20 +47,20 @@ create table courses_students
     course_id  bigint not null,
     student_id bigint not null,
     constraint FK_student_course
-        foreign key (student_id) references user (id),
+        foreign key (student_id) references user (id) ON DELETE CASCADE,
     constraint FK_course_student
-        foreign key (course_id) references course (id)
+        foreign key (course_id) references course (id) ON DELETE CASCADE
 );
 
 create table student_work
 (
     id         bigint auto_increment primary key,
-    absent     bit          null,
-    mark       double(3, 1) null,
-    lesson_id  bigint       not null,
-    student_id bigint       not null,
-    created    datetime(6)  null,
-    updated    datetime(6)  null,
+    absent     bit         null,
+    mark       int(2)      null,
+    lesson_id  bigint      not null,
+    student_id bigint      not null,
+    created    datetime(6) null,
+    updated    datetime(6) null,
     constraint FK_lesson_student_work
         foreign key (lesson_id) references lesson (id) ON DELETE CASCADE,
     constraint FK_student_student_work

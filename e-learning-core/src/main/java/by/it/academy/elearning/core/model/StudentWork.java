@@ -22,6 +22,7 @@ public class StudentWork extends BaseModel {
 
     private Boolean absent = false;
 
-    private Double mark;
+    @Column(precision = 2)
+    private Integer mark;
 
 }

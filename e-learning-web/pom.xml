@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>by.it.academy</groupId>
-        <artifactId>elearning</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <artifactId>e-learning</artifactId>
+        <version>0.0.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>elearning-web</artifactId>
+    <artifactId>e-learning-web</artifactId>
 
     <name>e-learning-web</name>
     <description>ELearning web module</description>
@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>by.it.academy</groupId>
-            <artifactId>eleadning-core</artifactId>
+            <artifactId>e-learning-core</artifactId>
             <version>${project.version}</version>
         </dependency>
 

@@ -3,10 +3,7 @@ package by.it.academy.elearning.core.model;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
+import javax.persistence.*;
 
 @Data
 @NoArgsConstructor
@@ -15,6 +12,7 @@ import javax.persistence.Enumerated;
 @EqualsAndHashCode(callSuper = false)
 @SuperBuilder
 @Entity
+@Table(name = "user")
 public class User extends BaseModel {
 
     @Column(nullable = false)
