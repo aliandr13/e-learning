@@ -1,6 +1,6 @@
 FROM openjdk:11-jdk-slim
-RUN mkdir /opt/elearning 
-COPY ./elearning-web/target/elearning-web.jar /opt/elearning/
-WORKDIR /opt/elearning
+RUN mkdir /opt/e-learning
+COPY ./e-learning-web/target/e-learning-web.jar /opt/e-learning/
+WORKDIR /opt/e-learning
 EXPOSE 8080
-CMD java -jar elearning-web.jar
+CMD java -jar e-learning-web.jar

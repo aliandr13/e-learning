@@ -5,11 +5,12 @@
     <parent>
         <groupId>by.it.academy</groupId>
         <artifactId>e-learning</artifactId>
-        <version>0.0.2</version>
+        <version>1.0.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>e-learning-core</artifactId>
+    <packaging>jar</packaging>
 
     <name>e-learning-core</name>
     <description>ELearning core module</description>
@@ -61,12 +62,6 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
     </build>
 
 </project>

@@ -39,7 +39,9 @@
                 <td th:text="${student.name}"></td>
                 <td th:each="lesson : ${course.lessons}">
                     <div th:with="work=${map.get(lesson.id + '_' + student.id)}">
-                        <span th:text="${work.absent} ? 'ABSENT' :  ${work.mark}"></span>
+                        <div th:if="${work != null}">
+                            <span th:text="${work.absent} ? 'ABSENT' :  ${work.mark}"></span>
+                        </div>
                     </div>
                 </td>
 

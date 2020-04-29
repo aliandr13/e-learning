@@ -11,7 +11,7 @@
 
     <groupId>by.it.academy</groupId>
     <artifactId>e-learning</artifactId>
-    <version>0.0.2</version>
+    <version>1.0.1</version>
     <packaging>pom</packaging>
 
     <name>e-learning</name>

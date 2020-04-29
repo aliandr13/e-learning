@@ -1,5 +1,5 @@
 INSERT INTO user (id, created, updated, email, name, password, phone, role, surname) VALUES (1, '2020-03-22 15:28:34', null, 'admin@mail.com', 'admin', '$2a$10$RVLWALKNm0QKRnVYnuOAgOByLRjzELeU2PXIm817BuoAuWAxmLere', null, 'ADMIN', 'admin');
-INSERT INTO user (id, created, updated, email, name, password, phone, role, surname) VALUES (2, '2020-03-31 20:52:21.267863000', null, 'zenkevich.alexander@gmail.com', 'ALIAKSANDR', '$2a$10$FB2hOeIycPBI0BV1cyzPcu5Ogv7equ3hOmUySzscgvlXfcfvIWkmK', '80293458054', 'TEACHER', 'ZENKEVICH');
+INSERT INTO user (id, created, updated, email, name, password, phone, role, surname) VALUES (2, '2020-03-31 20:52:21.267863000', null, 'teacher@gmail.com', 'ALIAKSANDR', '$2a$10$FB2hOeIycPBI0BV1cyzPcu5Ogv7equ3hOmUySzscgvlXfcfvIWkmK', '80293458054', 'TEACHER', 'ZENKEVICH');
 INSERT INTO user (id, created, updated, email, name, password, phone, role, surname) VALUES (3, '2020-04-01 00:04:37', null, 'student@tut.by', 'Иван', '$2a$10$RVLWALKNm0QKRnVYnuOAgOByLRjzELeU2PXIm817BuoAuWAxmLere', '', 'STUDENT', 'Иванов');
 INSERT INTO user (id, created, updated, email, name, password, phone, role, surname) VALUES (4, '2020-04-01 00:06:17', null, 'student@yandex.ru', 'Петр', '$2a$10$RVLWALKNm0QKRnVYnuOAgOByLRjzELeU2PXIm817BuoAuWAxmLere', null, 'STUDENT', 'Петров');
 
